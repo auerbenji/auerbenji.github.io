@@ -28,6 +28,7 @@ plugins:
   - jekyll-feed
   - jekyll-gist
   - jekyll-paginate
+  - jekyll-remote-theme
 
 # Sidebar link settings
 sidebar_home_link:  true
