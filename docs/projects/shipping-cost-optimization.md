@@ -24,6 +24,7 @@ No? Well, me neighter. Let's investigate how its done anyways!
 ---
 
 # Introduction
+A company ships three different goods.
 
 # Problem statement
 
