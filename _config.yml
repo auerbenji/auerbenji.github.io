@@ -13,6 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
+email: auerbenji@oater.de
 title: auerbenji
 description: A Jekyll theme for documentation
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -143,7 +144,7 @@ liquid:
 back_to_top: true
 back_to_top_text: "Back to top"
 
-footer_content: 'Copyright &copy; 2025 Benjamin Auer. Unless otherwise stated, this page expresses my work/views/opinions. Page hosted on GitHub, using the Just the Docs by Patrick Marsceill. Distributed by an <a href="https://github.com/just-the-docs/just-the-docs/tree/main/LICENSE.txt">MIT license.</a> <a href="https://www.netlify.com/">This site is powered by Netlify.</a>'
+footer_content: 'Copyright &copy; 2025 Benjamin Auer. Unless otherwise stated, this page expresses my work/view/opinion. Page hosted on GitHub, using Just the Docs by Patrick Marsceill under an <a href="https://github.com/just-the-docs/just-the-docs/tree/main/LICENSE.txt">MIT license.</a> <a href="https://www.netlify.com/">This site is powered by Netlify.</a>'
 
 # Footer last edited timestamp
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
@@ -203,3 +204,4 @@ compress_html:
   profile: false
   # ignore:
   #   envs: all
+  

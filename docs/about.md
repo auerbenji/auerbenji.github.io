@@ -6,7 +6,7 @@ nav_order: 2
 # About me
 {: .no_toc }
 
-They there, I am a process systems engineer. If you want to get to know a little bit about myself, please read along.
+Hello there! I am Benjamin. If you want to get to know me, please read along.
 {: .fs-6 .fw-300 }
 
 ## Table of contents
@@ -17,73 +17,35 @@ They there, I am a process systems engineer. If you want to get to know a little
 
 ---
 
-I was born at a very young age.
+Interested in discussion? Contact me via [mail](mailto:{{ site.email }}).
 
-## 2025-2020
+## Who is that guy?
 
-```yaml
-# Set a path/url to a logo that will be displayed instead of the title
-logo: "/assets/images/just-the-docs.png"
-```
+Hello there! I’m Benjamin Auer and I am founder and COO of [The Oater](https://www.oater.de). My work there is centerd around just-in-timne supply chains for perishable and dangerous goods. I also do sales and coordinate the research projects that The Oater is involved in.
+At The Oater we make it fresh by transferring the point of production to the place of consumption by building micro-factories.
+I have a strong background in process systems engineering (PSE). PSE is concerned with the optimal operation of chemical systems, applying mathematical modeling and optimization techniques.
+My training started at RWTH Aachen, where I worked for Alexander Mitsos. At the end of my studies I had the great honor to work at the Pistikopoulos Lab at Texas A&M Unviversity.
+When I do not work, I am traveling the world. Or I am diving. Or making pastry.
 
-## Site favicon
 
-```yaml
-# Set a path/url to a favicon that will be displayed by the browser
-favicon_ico: "/assets/images/favicon.ico"
-```
+## Acknowledgments
+Dustin Kenefake inspired me to build this page. Make sure to have a look at his amazing projects [here](https://dkenefake.github.io/).
+Marcello Di Martino motivated and supported me to write my own publication.
 
-If the path to your favicon is `/favicon.ico`, you can leave `favicon_ico` unset.
 
-## Search
-
-```yaml
-# Enable or disable the site search
-# Supports true (default) or false
-search_enabled: true
-
-search:
-  # Split pages into sections that can be searched individually
-  # Supports 1 - 6, default: 2
-  heading_level: 2
-  # Maximum amount of previews per search result
-  # Default: 3
-  previews: 3
-  # Maximum amount of words to display before a matched word in the preview
-  # Default: 5
-  preview_words_before: 5
-  # Maximum amount of words to display after a matched word in the preview
-  # Default: 10
-  preview_words_after: 10
-  # Set the search token separator
-  # Default: /[\s\-/]+/
-  # Example: enable support for hyphenated search words
-  tokenizer_separator: /[\s/]+/
-  # Display the relative url in search results
-  # Supports true (default) or false
-  rel_url: true
-  # Enable or disable the search button that appears in the bottom right corner of every page
-  # Supports true or false (default)
-  button: false
-  # Focus the search input by pressing `ctrl + focus_shortcut_key` (or `cmd + focus_shortcut_key` on macOS)
-  focus_shortcut_key: 'k'
-```
-
-## Mermaid Diagrams
+## What I work on
 {: .d-inline-block }
 
 New (v0.4.0)
 {: .label .label-green }
 
-The minimum configuration requires the key for `version` ([from jsDelivr](https://cdn.jsdelivr.net/npm/mermaid/)) in `_config.yml`:
-
-```yaml
-mermaid:
-  # Version of mermaid library
-  # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
-  version: "9.1.3"
+```mermaid
+graph TD;
+    accTitle: the diamond pattern
+    accDescr: a graph with four nodes: A points to B and C, while B and C both point to D
+	
+    Benji-->A(COO, The Oater);
+    Benji-->B(ext. Researcher, Pistikopoulos Lab);
+    Benji-->C(Divemaster, in progress);
+	Benji-->D(Kitchening, discontinued);
 ```
-
-Provide a `path` instead of a `version` key to load the mermaid library from a local file.
-
-See [the Code documentation]({% link docs/ui-components/code/index.md %}#mermaid-diagram-code-blocks) for more configuration options and information.

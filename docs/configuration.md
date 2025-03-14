@@ -6,7 +6,7 @@ nav_order: 2
 # About me
 {: .no_toc }
 
-They there, I am a process systems engineer. If you want to get to know a little bit about myself, please read along.
+This page is about to be deleted, once all dependencies are cleared.
 {: .fs-6 .fw-300 }
 
 ## Table of contents

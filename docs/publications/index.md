@@ -5,4 +5,5 @@ nav_order: 2
 
 # Publications
 
-this is a non exhaustive list of my publications.
+I do also write. This is a list of my publications.
+

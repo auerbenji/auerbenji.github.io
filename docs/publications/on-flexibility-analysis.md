@@ -1,16 +1,28 @@
 ---
-title: On flexibility analysis for large scale location-allocation networks
+title: On flexibility analysis
 parent: Publications
 nav_order: 1
 ---
 
-# Abstract
+---
+## Table of contents
+{: .no_toc .text-delta }
 
-Work in progress. Currently under review. Come back later.
+1. TOC
+{:toc}
+---
+
+# Abstract
+{: .d-inline-block }
+04-01-2025
+{: .label .label-green }
+
+Work in progress. Come back later.
+
 
 # Authors
-Work in progress. Currently under review. Come back later.
+Work in progress. Come back later.
 
 # Link to document
 
-The full article is available at [ACS](https://doi.org/10.1021/acs.energyfuels.4c04775).
+The full article is available at
