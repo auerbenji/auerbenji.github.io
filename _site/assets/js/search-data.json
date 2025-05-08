@@ -1245,36 +1245,36 @@
     
     "relUrl": "/docs/layout/minimal/minimal/"
   },"178": {
-    "doc": "On flexibility analysis",
+    "doc": "Algorithmic advances in flexibility analysis for large-scale location allocation problems",
     "title": "Table of contents",
-    "content": ". | Abstract | Authors | Link to document | . ",
+    "content": ". | Abstract | Authors | Link to document | . The manuscript is currently under review at EJOR. I’ll make a note once the manuscript is published. ",
     "url": "/docs/publications/on-flexibility-analysis/#table-of-contents",
     
     "relUrl": "/docs/publications/on-flexibility-analysis/#table-of-contents"
   },"179": {
-    "doc": "On flexibility analysis",
+    "doc": "Algorithmic advances in flexibility analysis for large-scale location allocation problems",
     "title": "Abstract",
-    "content": "04-01-2025 . Work in progress. Come back later. ",
+    "content": "05-08-2025 . Flexibility analysis (FA) assess a system’s ability to adapt to changing operating conditions and has proved especially useful when comparing different design choices as FA provides a single, unified metric. While mature theory and solution algorithms are readily available its inherent complexity in formulation as well as its computational burden hinders broad application extending beyond its origins in chemical engineering. This work applies FA to a large-scale location-allocation problem for electric vehicle charging infrastructure planning, resulting in a multi-period mixed-integer linear programming optimization problem. The investigateg reformulations and shortcut-methods, substantially decreased computational complexity. The system is then studied for its flexibility against limited travel distance and infrastructure investment for varying bounds of uncertainty. We show that the original planning problem can be solved for the flexible solution gaining Pareto curves between robustness of the solution and the required additional investment without any necessity to solve the FA problem by exploiting the network problem structure. ",
     "url": "/docs/publications/on-flexibility-analysis/#abstract",
     
     "relUrl": "/docs/publications/on-flexibility-analysis/#abstract"
   },"180": {
-    "doc": "On flexibility analysis",
+    "doc": "Algorithmic advances in flexibility analysis for large-scale location allocation problems",
     "title": "Authors",
-    "content": "Work in progress. Come back later. ",
+    "content": "Benjamin Marc Auer, Marcello Di Martino, Dustin Ryan Kenefake, Efstratios Pistikopoulos . ",
     "url": "/docs/publications/on-flexibility-analysis/#authors",
     
     "relUrl": "/docs/publications/on-flexibility-analysis/#authors"
   },"181": {
-    "doc": "On flexibility analysis",
+    "doc": "Algorithmic advances in flexibility analysis for large-scale location allocation problems",
     "title": "Link to document",
-    "content": "The full article is available at . ",
+    "content": "The full article is available when published. Come back later. ",
     "url": "/docs/publications/on-flexibility-analysis/#link-to-document",
     
     "relUrl": "/docs/publications/on-flexibility-analysis/#link-to-document"
   },"182": {
-    "doc": "On flexibility analysis",
-    "title": "On flexibility analysis",
+    "doc": "Algorithmic advances in flexibility analysis for large-scale location allocation problems",
+    "title": "Algorithmic advances in flexibility analysis for large-scale location allocation problems",
     "content": ". ",
     "url": "/docs/publications/on-flexibility-analysis/",
     
