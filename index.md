@@ -12,6 +12,9 @@ permalink: /
 I am Benjamin. This is the place where I write about stuff that is in my life.
 {: .fs-6 .fw-300 }
 
+{: .warning }
+> This page holds my individual views only.
+
 ## Table of contents
 {: .no_toc .text-delta }
 
@@ -35,10 +38,21 @@ bundle exec jekyll clean
 bundle exec jekyll serve --livereload
 ```
 
+```yaml
+# Pushing an empty commit to github
+git commit --allow-empty -m "trigger rebuild"
+git push origin main
+```
 
+{: .note }
+The equation $$E = mc^2$$ is displayed inline, because its not separated by a spaceline.
 
-{: .warning }
-> This page holds my individual views only.
+{: .note }
+The following equation is separeted by a spaceline, so its shown large and centered/middle orientated
+
+$$
+\int_{a}^{b} f(x)\, dx = F(b) - F(a)
+$$
 
 
 ## What to expect
