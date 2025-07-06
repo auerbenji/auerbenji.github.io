@@ -30,7 +30,7 @@ We will investigate on that issue in this short blog entry.
 
 # Context: Teece on innovation and appropriability
 
-To set the stage: **David J. Teece’s 1986** work, *Profiting from Technological Innovation*, offers a foundational insight on innovator/imitator interaction and how and when up- and downstream suppliers may also benefit.
+To set the stage: **David J. Teece’s** work from 1986, *Profiting from Technological Innovation*, offers a foundational insight on innovator/imitator interaction and how and when up- and downstream suppliers may also benefit.
 Despite being written almost 40 years ago, the concepts remain shockingly accurate and can even be applied to today's AI revolution.
 
 Teece acknowledges that innovators rarely succeed through invention alone.
@@ -101,6 +101,6 @@ The Oater is proud of its patent! But prouder still that The Oater treated IP as
 Want to read our patent? Look it up here: [DPMA Register – File No. AZ 102023101947.3](https://register.dpma.de/DPMAregister/Patentschriftanzeigen?docId=DE102023101947A1).
 A EP filing is ongoing, like will be provided soon.
 
-# Suggested reading
+# References
 **David J. Teece**, [*Profiting from Technological Innovation: Implications for Integration, Collaboration, Licensing and Public Policy*](https://doi.org/10.1016/0048-7333(86)90027-2), Research Policy, 1986.
 A foundational paper explaining why **control over complementary assets and timing** determines whether innovators capture value from innovation.
