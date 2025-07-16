@@ -101,8 +101,8 @@ The Oater is proud of its patent! But prouder still that The Oater treated IP as
 
 # Looking ahead
 Want to read our patent? Look it up here:
-- [DPMA Register – File No. AZ 102023101947.3](https://register.dpma.de/DPMAregister/Patentschriftanzeigen?docId=DE102023101947A1)
-- [EPO Register – File No. EP 24153444](https://data.epo.org/publication-server)
+- [DPMA Register – File No.](https://register.dpma.de/DPMAregister/pat/basis) 102023101947
+- [EPO Register – File No.](https://data.epo.org/publication-server) 24153444
 
 # References
 **David J. Teece**, [*Profiting from Technological Innovation: Implications for Integration, Collaboration, Licensing and Public Policy*](https://doi.org/10.1016/0048-7333(86)90027-2), Research Policy, 1986.
