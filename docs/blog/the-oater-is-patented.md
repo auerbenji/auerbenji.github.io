@@ -4,6 +4,21 @@ parent: Blog
 nav_order: 2
 ---
 
+# Great news: The Oater is patent approved!
+{: .no_toc }
+{: .d-inline-block }
+07-04-2025
+{: .label .label-green }
+
+On August XXrd, 2025, The Oater received final patent approval for its long standing patent application at the [DPMA](https://www.dpma.de/) from January 23rd, 2023.
+This is the kind of milestone that feels big - until you realize it took over 30 months from the submission to acceptance.
+Multiple rounds of review, examiner reports, claim adjustments, and substantial costs were involved.
+So why go through it?
+Why should startups — resource-constrained by design — spend time and capital on intellectual property?
+And could that money have been used more effectively elsewhere?
+We will investigate on that issue in this article.
+{: .fs-6 .fw-300 }
+
 ---
 ## Table of contents
 {: .no_toc .text-delta }
@@ -12,25 +27,12 @@ nav_order: 2
 {:toc}
 ---
 
-# Great news: The Oater is patent approved!
-{: .d-inline-block }
-07-04-2025
-{: .label .label-green }
+# Context: Teece on innovation and appropriability
 
 {: .note-title }
 > Disclaimer
 >
 > This blog post holds my individual views only. They are not associated with my work at The Oater. The Oater is a company with more than one opinion. We may pursue corporate goals that are not necessarily congruent with the individual goals of certain stakeholders.
-
-On August XXrd, 2025, The Oater received final patent approval for its long standing patent application at the [DPMA](https://www.dpma.de/) from January 23rd, 2023.
-This is the kind of milestone that feels big - until you realize it took over **30 months** from the submission to acceptance.
-Multiple rounds of review, examiner reports, claim adjustments, and substantial costs were involved.
-So why go through it?
-Why should startups — resource-constrained by design — spend time and capital on intellectual property?
-And could that money have been used more effectively elsewhere?
-We will investigate on that issue in this short blog entry.
-
-# Context: Teece on innovation and appropriability
 
 To set the stage: **David J. Teece’s** work from 1986, *Profiting from Technological Innovation*, offers a foundational insight on innovator/imitator interaction and how and when up- and downstream suppliers may also benefit.
 Despite being written almost 40 years ago, the concepts remain shockingly accurate and can even be applied to today's AI revolution.
