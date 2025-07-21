@@ -53,7 +53,7 @@ We then compare a standardized shopping cart with an optimized shopping cart:
 The results indicate a reduction of transportation costs by 40%.
 We then compare the variable cost proportion attributed to transportation with industry standards.
 
-## CEP sector - weight and girth matters
+## CEP sector - weight and girth length
 In order for the CEP sector to operate in a particularly cost-efficient manner and offer low prices to consumers, it is highly standardized with parcels meeting strict criteria in order to be processed as CEP.
 Three criterias are always applicable:
 - weight with most transportation companies delivering parcels up to 31.5kg translating to a maximum goods weight of 30kg (66lbs)
@@ -73,41 +73,68 @@ Girth + length ensures that apart from weight a certain "density" maintained. Sp
 Dangerous goods are less an economic category than a legal one, defined by the Agreement of September 30, 1957 concerning the International Carriage of Dangerous Goods by Road, ADR, from 1957 ensuring safe transportation.
 This agreement categorizes goods for road transport, defines warning and safety instructions and lists exceptions. Exceptions include:
 - simplified transport of certain dangerous goods when carried in small quantities as part of a company’s ancillary activities (e.g., maintenance, repair, construction) according to  Special Provision SV1 (ADR 3.3)
-- limited quantities (LQ) allows exemptions from most ADR provisions when dangerous goods are packaged in very small quantities per inner and outer packaging
+- limited quantities (LQ) allows exemptions from most ADR provisions when dangerous goods are packaged in very small quantities per inner and outer packaging (ADR 3.2)
 - Lithium-ion batteries in different sizes according to total capacity, cell size with respect to packaging, and prior certification
 - blood and tissue samples when transported in specific packaging and quantity
 
-## 3PL sector - every pick matters
-Hier beschreibe ich kurz wie der 3pl sektore aussieht, was hier bepreist wird und was wir tun können.
+## Warehouse - every pick matters
+While a carrier only provides transportation services and thus assumes that the company itself is in physical possession of the outbound goods, this is not always the case.
+Most retailers and manufacturers rely on yet another third party that provides storage space.
+Typically this party is referred to as warehouse provider.
+Optionally, the warehouse provider also provides order fulfillment.
+In case the whole value chain is fullfilled via a third party, one refers to this as third-party-logistics, 3PL.
 
-## The Oater product portfolio and consumer goods
+Warehouses hold space for incoming goods, storage, a dedicated picking system, a packing area and a freight forwarding area. Consequently service providers typically attribute cost for the administration and processing of incoming goods (usually on paletts), the administration of orders, the pick from a palett, the packing into carton and the placing into cargo space. A pick is associated with one product category, regardless of the quantity of the product. The occupied warehouse space is charged on a daily rate.
+
+It makes sense to bundle consecutive orders per customer in order to save on additional picking costs (picking two pieces of the same type is cheaper than picking the same piece two times). Apart from that, the strict billing system, in which every single step is charged individually, leaves little room for cost optimization shifting focus from warehouse back to CEP provider.
+
+{: .note-title }
+> 3PL
+>
+> Third-Party Logistics (3PL) refers to a business model in which a company outsources its logistics processes to an external service provider, a “third party", regardless of the part of the logistics provided. Typically logistic processes are divided into warehousing/storage, usually including the control of incoming and outgoing goods (administration, picking, packing, truck loading) while another party takes care of transportation.
+While some companies offer a full-service other companies only provide one or some of the mentioned services.
+> ([Red Stag Fulfillment](https://redstagfulfillment.com/3pl-definition-process-resources/))
+
+
+## The Oater product portfolio and consumable goods
 The Oater sells an automated oat drink production machine called The Oater Barista for fresh on-site production of oat drink.
 This machine consists of a reactor, water inlet and outlet, a stirrer, and a heating jacket for the reactor as well as various in- and outlets.
-During production, dry mix of oat flour and enzymes is suspended in an aqueous solution on site for simultaneous starch degradation and saccharification.
+During production, a dry mix consisting of oat flour and enzymes is suspended in an aqueous solution on site for simultaneous starch degradation and saccharification.
 After saccharification, oil is dispersed into the solution.
 Once the ready-to-consume product has been dispensed, The Oater Barista doses a cleaning agent into the reactor and starts a cleaning cycle.
+The Oater Barista's batch production is patented. Interested? [Read on here](https://auerbenji.github.io/docs/blog/the-oater-is-patented/).
 
-The dry mix, oil, and cleaning agent are sent to the customer on a monthly basis.
-The quantities depend on the customer's consumption volume, which they can freely select in an online shop as a subscription size between 80 liters and 500 liters of oat drink per month.
+Dry mix, oil and cleaning agent are sent to the customer on a monthly basis.
+The quantities depend on the customer's consumption volume which they can adjust in an online shop as a subscription size between 80 liters and 500 liters of oat drink per month.
 Dry mix, oil, and cleaning agent are only available in a single container size.
-The cleaning agent is classified as dangerous goods according to ADR 3.4, thus transportation by CEP is only permitted with correct labeling and adds a surcharge.
+The cleaning agent is classified as dangerous good according to ADR 3.2 under the UN-number 1719 and thus transportation by CEP is only permitted in containers not exceeding one liters.
 
-The machine uses exactly 1 dry mix pouch, 1/5 of an oil bottle and 1/9 of the cleaning agent to produce 4.5 liters of oat drink per production cycle which are billed to the customer via the monthly subscription.
-Consequently, each consumable product is sufficient to produce
-- dry mix for 4.5 liters of oat drink
-- oil for 22.5 liters of oat drink
-- cleaning agent for 40.5 liters of oat drink
+# Methodology
+The The Oater Barista machine uses exactly 1 dry mix pouch, 1/5 of an oil bottle and 1/9 of a one liter cleaning agent bottle to produce 4.5 liters of oat drink in a single production cycle.
+Consequently
+- one pouch of dry mix is sufficient to produce 4.5 liters of oat drink
+- one bottle of oil is sufficient to produce 22.5 liters of oat drink
+- one bottle of cleaning detergent is sufficient to produce 40.5 liters of oat drink.
 
+We notice that not only the consumable goods' weights must be taken into account but the gross weight including paper pouch and bottles. While the weight difference might be neglectable for paper pouch and detergent plastic bottle, the oil is shipped in a glas bottle weighing around half of the gross oil's  weight.
+Furthermore, only complete quantities may be shipped. This causes ceiling for each subscription size and consumable. This effects mostly small subscription sizes.
 
-# Problem statement
-Given that The Oater Barista is installed at a customer's site with a known customer's subscription size and a known cost vs weight vector of the carrier and its hazardous goods surcharge, as well as the exact costs for the 3PL provider what is the packing rule that yields minimal logistics costs?
+Given that The Oater Barista with a known customer's subscription size and a known shipping-cost-to-weight vector and known its dangerous goods penalty, as well known costs for warehousing service we want to find the packing rule that yields minimal logistics costs.
 We assume that girth size is never a limiting factor due to the high density of the individual products.
 
+As a starting point we place all cleaning agent bottles in a single parcel so that the penalty is only paid once.
+However, the discreet nature of the different weith of the product classes means that it may no longer be possible to make particularly precise use of the shipping weight, as the weight unit of the cleaning detergent is no longer available.
+Furthermore, the degressive cost structure of shipping costs makes it more attractive to pack two medium-weight packages than one very heavy and one light package.
+It renders obvious that there is no simple heuristic or packing instruction that guarantees minimal shipping costs. We will therefore proceed to mathematical optimization to minimize shipping cost.
+
+Mathematical optimization, also known as mathematical programming is the art of selecting of the best solution, given a set of conditions that have to hold true, no matter what (equality constraints) as well as a set of conditions that may vary in a given range (inequality constraints).
+The nature of the variables involved in the cost function and in the constraints define the problem category and thus the solution approach. Mathematical programming is used everywhere, from routing problems, AI training and shipping cost optimization to advanced process control and has equal origins in the chemical engineering community as well as in operations research. Mathematical optimization has emerget to provide solution strategies to deal with bi-level problems (optimization problems that are subject to another optimization problem), uncertainty (both stochastic and worst case) as well as many more "special" cases. It takes a lifetime to attempt to learn all about it. The interested reader is directed to my former Professor Stratos Pistikopoulos who I taught me optimization [Parametric](https://parametric.tamu.edu/) as well as his collegues in the field.
+We will skip most of the basics and assume a sound background in optimization.
+Furthermore I suggest reading articles in [CACE](https://www.sciencedirect.com/journal/computers-and-chemical-engineering), a great journal to follow and inspire how engineering problems are solved via optimization.
+
+# Solution strategy
 
 
-
-# Modeling
-
-# Results
+# Results and discussion
 
 # References
