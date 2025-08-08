@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 email: auerbenji@oater.de
 title: auerbenji
-description: A Jekyll theme for documentation
+description: A personal blog where I share what is on my mind.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://auerbenji.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 repository: auerbenji/auerbenji.github.io # for github-metadata

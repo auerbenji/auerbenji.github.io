@@ -1,6 +1,7 @@
 ---
 title: The Oater is patented
 parent: Blog
+description: Why we pursued a patent, how it fits our moat, and what founders should know about patents and fundraising.
 nav_order: 2
 ---
 
