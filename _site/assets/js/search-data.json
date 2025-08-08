@@ -1604,14 +1604,14 @@
   },"229": {
     "doc": "Shipping cost optimization with dangerous goods penalty",
     "title": "Abstract",
-    "content": "07-17-2025 . Did you ever wonder how to optimally pack parcels, serving customers with various subscription sizes of while avoiding a dangerous goods shipping penalty fee? No? Well, me neighter. Let’s investigate how its done anyways! Stay with me, its worth it: We will reduce shipping cost by 40% and proove why shopping-cart bundling is worth it! . ",
+    "content": "07-17-2025 . Did you ever wonder how to optimally pack parcels, serving customers with various subscription sizes of while avoiding a dangerous goods shipping penalty fee? No? Well, me neighter. Let’s investigate how its done anyways! Stay with me, its worth it: We will reduce shipping cost by 40% just by intelligently exploiting the degressive cost-per-weight structure in today’s CEP sector and show why shopping-cart bundling is worth it! . ",
     "url": "/docs/projects/shipping-cost-optimization/#abstract",
     
     "relUrl": "/docs/projects/shipping-cost-optimization/#abstract"
   },"230": {
     "doc": "Shipping cost optimization with dangerous goods penalty",
     "title": "Table of contents",
-    "content": ". | Introduction . | CEP sector - weight and girth length | Warehouse - every pick matters | The Oater product portfolio and consumable goods | . | Methodology | Solution strategy | Results and discussion | References | . ",
+    "content": ". | Introduction . | CEP sector - weight and girth length | Warehouse - every pick matters | The Oater product portfolio and consumable goods | . | Methodology . | Cost of goods | Carrier cost . | Shipping cost vector | Parcel content and weight | . | Warehouse cost | Solution strategy . | Cost function | . | . | Results and discussion | References | . ",
     "url": "/docs/projects/shipping-cost-optimization/#table-of-contents",
     
     "relUrl": "/docs/projects/shipping-cost-optimization/#table-of-contents"
@@ -1646,284 +1646,305 @@
   },"235": {
     "doc": "Shipping cost optimization with dangerous goods penalty",
     "title": "Methodology",
-    "content": "The The Oater Barista machine uses exactly 1 dry mix pouch, 1/5 of an oil bottle and 1/9 of a one liter cleaning agent bottle to produce 4.5 liters of oat drink in a single production cycle. Consequently . | one pouch of dry mix is sufficient to produce 4.5 liters of oat drink | one bottle of oil is sufficient to produce 22.5 liters of oat drink | one bottle of cleaning detergent is sufficient to produce 40.5 liters of oat drink. | . We notice that not only the consumable goods’ weights must be taken into account but the gross weight including paper pouch and bottles. While the weight difference might be neglectable for paper pouch and detergent plastic bottle, the oil is shipped in a glas bottle weighing around half of the gross oil’s weight. Furthermore, only complete quantities may be shipped. This causes ceiling for each subscription size and consumable. This effects mostly small subscription sizes. Given that The Oater Barista with a known customer’s subscription size and a known shipping-cost-to-weight vector and known its dangerous goods penalty, as well known costs for warehousing service we want to find the packing rule that yields minimal logistics costs. We assume that girth size is never a limiting factor due to the high density of the individual products. As a starting point we place all cleaning agent bottles in a single parcel so that the penalty is only paid once. However, the discreet nature of the different weith of the product classes means that it may no longer be possible to make particularly precise use of the shipping weight, as the weight unit of the cleaning detergent is no longer available. Furthermore, the degressive cost structure of shipping costs makes it more attractive to pack two medium-weight packages than one very heavy and one light package. It renders obvious that there is no simple heuristic or packing instruction that guarantees minimal shipping costs. We will therefore proceed to mathematical optimization to minimize shipping cost. Mathematical optimization, also known as mathematical programming is the art of selecting of the best solution, given a set of conditions that have to hold true, no matter what (equality constraints) as well as a set of conditions that may vary in a given range (inequality constraints). The nature of the variables involved in the cost function and in the constraints define the problem category and thus the solution approach. Mathematical programming is used everywhere, from routing problems, AI training and shipping cost optimization to advanced process control and has equal origins in the chemical engineering community as well as in operations research. Mathematical optimization has emerget to provide solution strategies to deal with bi-level problems (optimization problems that are subject to another optimization problem), uncertainty (both stochastic and worst case) as well as many more “special” cases. It takes a lifetime to attempt to learn all about it. The interested reader is directed to my former Professor Stratos Pistikopoulos who I taught me optimization Parametric as well as his collegues in the field. We will skip most of the basics and assume a sound background in optimization. Furthermore I suggest reading articles in CACE, a great journal to follow and inspire how engineering problems are solved via optimization. ",
+    "content": "The The Oater Barista machine uses exactly 1 dry mix pouch, 1/5 of an oil bottle and 1/9 of a cleaning agent bottle to produce 4.5 liters of oat drink in a single production cycle. Consequently . | one pouch of dry mix is sufficient to produce 4.5 liters of oat drink | one bottle of oil is sufficient to produce 22.5 liters of oat drink | one bottle of cleaning detergent is sufficient to produce 40.5 liters of oat drink. | . We notice that not only the consumable goods’ weight must be taken into account but the gross weight including paper pouch and bottle weight. While the weight difference might be neglectable for paper pouch and detergent plastic bottle, the oil is shipped in a glas bottle making up around half of the gross oil’s weight. Furthermore, only complete quantities may be shipped. This causes ceiling for each subscription size and consumable. This effects mostly small subscription sizes. Given a known customer’s subscription size and a known shipping-cost-to-weight vector and known dangerous goods penalty, as well known costs for warehousing service we want to find the packing rule that yields minimal logistics costs. We assume that girth size is never a limiting factor due to the high density of the individual products. As a starting point we place all cleaning agent bottles in a single parcel so that the penalty is only paid once. However, the discreet nature of the different weith of the product classes means that it may no longer be possible to make particularly precise use of the shipping weight, as the weight unit of the cleaning detergent is no longer available. Furthermore, the degressive cost structure of shipping costs makes it more attractive to pack two medium-weight packages than one very heavy and one light package. It renders obvious that there is no simple heuristic or packing instruction that guarantees minimal shipping costs. We will therefore proceed to mathematical optimization to minimize shipping cost. Mathematical optimization, also known as mathematical programming is the art of selecting of the best solution, given a set of conditions that have to hold true (equality constraints) as well as a set of conditions that may vary in a given range (inequality constraints). The nature of the variables involved in the cost function and in the constraints define the problem category and thus the solution approach. Mathematical programming is used everywhere, from routing problems, AI training and shipping cost optimization to advanced process control and has equal origins in the chemical engineering community as well as in operations research. Mathematical optimization has emerget to provide solution strategies to deal with bi-level problems (optimization problems that are subject to another optimization problem), uncertainty (both stochastic and worst case) as well as many more “special” cases. It takes more than a lifetime to learn all about it. The interested reader is directed to my former Professor Stratos Pistikopoulos who taught me optimization (see Parametric) as well as his dear collegues in the field such as Professor Alexander Mitsos (see SVT). Furthermore I suggest reading articles in CACE, and EJOR, both great journal to follow and inspire how engineering problems are solved via optimization. ",
     "url": "/docs/projects/shipping-cost-optimization/#methodology",
     
     "relUrl": "/docs/projects/shipping-cost-optimization/#methodology"
   },"236": {
     "doc": "Shipping cost optimization with dangerous goods penalty",
+    "title": "Cost of goods",
+    "content": "We base the solution algorithm on the price per liter of produced oat drink and define a known monthly subscription model size \\(a\\). The known number of oat packs \\(N_T\\), oil bottles \\(N_O\\) and cleaning agent bottles \\(N_R\\) are consequently given by ceiling to the largest natural number that statisfies \\(a\\): . | \\[N_T = \\left\\lceil a/4.5 \\right\\rceil\\] | \\[N_O = \\left\\lceil a/22.5 \\right\\rceil\\] | \\[N_R = \\left\\lceil a/40.5 \\right\\rceil\\] | . where \\(N_T, N_O, N_R \\in \\mathbb{N}\\). Consequently the number of species subject to optimization is \\(N_S=3\\). Each item has a known weight \\(w = [w_T, w_O, w_R]^\\top\\) in kilo gram, and a known cost-per-piece \\(c = [c_T, c_O, c_R]^\\top\\) in Euro. ",
+    "url": "/docs/projects/shipping-cost-optimization/#cost-of-goods",
+    
+    "relUrl": "/docs/projects/shipping-cost-optimization/#cost-of-goods"
+  },"237": {
+    "doc": "Shipping cost optimization with dangerous goods penalty",
+    "title": "Carrier cost",
+    "content": "Carrier cost can be obtained by the multiplication of a cost-per-weight vector with a distribution matrix holding the content of each parcel. Shipping cost vector . The shipping cost vector holds the price-per-parcel within the associated shipping weight class. We remove 1.5 kg from each parcel to account for carton and filling weight. \\[V = \\begin{bmatrix} SC^\\top &amp; SW^\\top \\\\ \\end{bmatrix} = \\begin{bmatrix} 0 &amp; 0 \\\\ 3.62 &amp; 1.5 \\\\ 4.17 &amp; 3.5 \\\\ 4.83 &amp; 8.5 \\\\ 6.30 &amp; 13.5 \\\\ 6.85 &amp; 18.5 \\\\ 7.02 &amp; 23.5 \\\\ 7.29 &amp; 30 \\end{bmatrix}\\] The length of \\(\\mathbf{v}\\) is the number of different weight/cost categories provided by the CEP, here \\(N_\\mathbf{v} = 8\\), as we include the null-weight/cost as a convenient way to attribute zero cost associated with an empty, never packed parcel. Last we define the dangerous goods shipping cost penalty as \\(\\phi=3.5\\) as a one-time fee added to each parcel that contains \\(\\geq1\\) cleaning detergent bottles. Parcel content and weight . In oder to calculate the weight efficiently we introduce the distribution matrix \\(D \\in [N_S, N_T+N_O+N_R]\\) holding the number of items per species per parcel. As an upper bound for the number of parcels necessary to ship all items we conveniently use the sum of all individual items. Additionally, we introduce the cost category matrix \\(C \\in [N_V, N_T+N_O+N_R]\\) a zero-matrix consisting of zeros exept for the respective cost category of each parcel denoted with a \\(1\\). We lastly define a penalty vector \\(P \\in [N_T+N_O+N_R]\\) holding zeros for each parcel except for the parcel that hold \\(\\geq1\\) cleaning detergent bottles. ",
+    "url": "/docs/projects/shipping-cost-optimization/#carrier-cost",
+    
+    "relUrl": "/docs/projects/shipping-cost-optimization/#carrier-cost"
+  },"238": {
+    "doc": "Shipping cost optimization with dangerous goods penalty",
+    "title": "Warehouse cost",
+    "content": "Warehouse cost assume that each subscription triggers only one monthly “warehouse run”, even if the total shopping cart is then packed in more than one parcel. For ease of understanding we separate the warehouse cost \\(c_{\\text{warehouse}}\\) into \\(c_{\\text{3PL}}\\) as well as \\(c_{parcel}\\): . | \\[c_{\\text{warehouse}} = c_{3PL}+c_{\\text{parcel}}\\] | \\[c_{\\text{3PL}} = c_A + c_P \\cdot N_S\\] | \\[c_{\\text{parcel}} = c_p \\cdot \\sum^P \\sum^C C_{c,p}\\] | . where \\(c_A\\) is the per-order administration fee and \\(c_P\\) is the per-pick fee. Both fees are known and warehouse provider dependent. \\(c_p\\) is a warehouse provider dependent cost associated with carton, filling and freight farwarding of each parcel and is thus multiplied with the number of parcels that servce the monthly subscription. To conveniently grasp the number of parcels we rely on \\(C\\). ",
+    "url": "/docs/projects/shipping-cost-optimization/#warehouse-cost",
+    
+    "relUrl": "/docs/projects/shipping-cost-optimization/#warehouse-cost"
+  },"239": {
+    "doc": "Shipping cost optimization with dangerous goods penalty",
     "title": "Solution strategy",
-    "content": " ",
+    "content": "Cost function . The cost to serve (CTS) of one liter of oat-drink is the cost of goods \\(CG\\), the carrier cost \\(CC\\) and the warehouse cost \\(WC\\): . \\[\\min \\frac{1}{a} (CG + CC + WC)\\] becoming . \\[\\min\\] when inserting the introduced variables. ",
     "url": "/docs/projects/shipping-cost-optimization/#solution-strategy",
     
     "relUrl": "/docs/projects/shipping-cost-optimization/#solution-strategy"
-  },"237": {
+  },"240": {
     "doc": "Shipping cost optimization with dangerous goods penalty",
     "title": "Results and discussion",
-    "content": " ",
+    "content": "Figure 1: Shipping cost optimization vector diagram. As shown in Figure 1, the cost flow starts from… . ",
     "url": "/docs/projects/shipping-cost-optimization/#results-and-discussion",
     
     "relUrl": "/docs/projects/shipping-cost-optimization/#results-and-discussion"
-  },"238": {
+  },"241": {
     "doc": "Shipping cost optimization with dangerous goods penalty",
     "title": "References",
     "content": " ",
     "url": "/docs/projects/shipping-cost-optimization/#references",
     
     "relUrl": "/docs/projects/shipping-cost-optimization/#references"
-  },"239": {
+  },"242": {
     "doc": "Shipping cost optimization with dangerous goods penalty",
     "title": "Shipping cost optimization with dangerous goods penalty",
     "content": " ",
     "url": "/docs/projects/shipping-cost-optimization/",
     
     "relUrl": "/docs/projects/shipping-cost-optimization/"
-  },"240": {
+  },"243": {
     "doc": "Tables",
     "title": "Tables",
     "content": "Tables are responsive by default, allowing wide tables to have a horizontal scroll to access columns outside of the normal viewport. | head1 | head two | three | . | ok | good swedish fish | nice | . | out of stock | good and plenty | nice | . | ok | good oreos | hmm | . | ok | good zoute drop | yumm | . | head1 | head two | three |:-------------|:------------------|:------| ok | good swedish fish | nice | out of stock | good and plenty | nice | ok | good `oreos` | hmm | ok | good `zoute` drop | yumm | . ",
     "url": "/docs/ui-components/tables/",
     
     "relUrl": "/docs/ui-components/tables/"
-  },"241": {
+  },"244": {
     "doc": "The Oater is patented",
     "title": "Great news: The Oater is patent approved!",
-    "content": "07-04-2025 . On August XXrd, 2025, The Oater received final patent approval for its long standing patent application at the DPMA from January 23rd, 2023. This is the kind of milestone that feels big - until you realize it took over 30 months from the submission to acceptance. Multiple rounds of review, examiner reports, claim adjustments, and substantial costs were involved. So why go through it? Why should startups — resource-constrained by design — spend time and capital on intellectual property? And could that money have been used more effectively elsewhere? We will investigate on that issue in this article. ",
+    "content": "07-24-2025 . On July 24th, 2025, The Oater received its final patent approval for its long standing patent application at the DPMA from January 26th, 2023. Furthermore, The Oater received approval at the EPO on August 27th, 2025. This feels big - however, it took 30 months from submission to acceptance. Multiple rounds of review, examiner reports, claim adjustments, and substantial costs were involved. So why go through it? Why should startups — resource-constrained by design — spend time and capital on intellectual property? And could that money have been used more effectively elsewhere? We will investigate on that issue in this article. ",
     "url": "/docs/blog/the-oater-is-patented/#great-news-the-oater-is-patent-approved",
     
     "relUrl": "/docs/blog/the-oater-is-patented/#great-news-the-oater-is-patent-approved"
-  },"242": {
+  },"245": {
     "doc": "The Oater is patented",
     "title": "Table of contents",
     "content": ". | Context: Teece on innovation and appropriability | Reviewing The Oater’s innovation, appropriability regime, and market power | A different viewpoint: IP as a signaling device for investors . | The time to file was yesterday. Yesterday four years ago. | IP is expensive, slow, and mostly optional | . | Looking ahead | References | . ",
     "url": "/docs/blog/the-oater-is-patented/#table-of-contents",
     
     "relUrl": "/docs/blog/the-oater-is-patented/#table-of-contents"
-  },"243": {
+  },"246": {
     "doc": "The Oater is patented",
     "title": "Context: Teece on innovation and appropriability",
     "content": "Disclaimer . This blog post holds my individual views only. They are not associated with my work at The Oater. The Oater is a company with more than one opinion. We may pursue corporate goals that are not necessarily congruent with the individual goals of certain stakeholders. To set the stage: David J. Teece’s work from 1986, Profiting from Technological Innovation, offers a foundational insight on innovator/imitator interaction and how and when up- and downstream suppliers may also benefit. Despite being written almost 40 years ago, the concepts remain shockingly accurate and can even be applied to today’s AI revolution. Teece acknowledges that innovators rarely succeed through invention alone. In fact, innovators might even loose their market advantage, when the innnovation is generated without the possession of . | A the required cospecialized assets, such as distribution or manufacturing capabilities | B presence of tight appropriability regimes, when the innovator does possess an ironclad patent or copyright protection and | C a product readiness that ensures a moderate design float from innovation to market readiness. | . Teece also claims that process patents are usually weaker in their protection power as small changes to the upstream process (and thus e. g. to a molecule) usually bypass existing protections while a similar product with unnoticeable differences may be derived (e. g. generika). ",
     "url": "/docs/blog/the-oater-is-patented/#context-teece-on-innovation-and-appropriability",
     
     "relUrl": "/docs/blog/the-oater-is-patented/#context-teece-on-innovation-and-appropriability"
-  },"244": {
+  },"247": {
     "doc": "The Oater is patented",
     "title": "Reviewing The Oater’s innovation, appropriability regime, and market power",
     "content": "The Oater patented its batch-container. The container holds integrated production and cleaning capabilities, including a mixing rod, cleaning nozzles and container inlets that may be rotated, opening during filling and closing during fermentation. So let’s assess The Oater’s market position in Teece’s three dimensions. | A The Oater does not hold the cospecialized assets to make use of its product innovation. The manufacturing capabilities are held by suppliers. The machine is then sold on the market, possibly giving access to the innovation to anyone who buys a machine. | B The Oater holds a patent with a rather weak appropriability regime, as other production capabilities or product variants (both in terms of system design and process management) are not only conceivable, but are already being used by the industry. Nevertheless, The Oater’s patent applies to the production in a small space with only one batch (fed-batch process), which could hinder on-the-shelf competition. | C Lastly, the market readiness of The Oater Barista oat drink machine is certainly given, as The Oater has been selling the product since spring 2024. This is good news for The Oater. | . We conlcude that only one of the three prerequisites for an innovator to benefit from its innovation are present. Moreover, it is evident that The Oater’s financial limits significantly reduce the speed at which an innovation yields a market/revenue success. Teece notes that this “head start” phase is a one-time event for the innovator. Once it has passed, the market advantages shift to asset holders and imitators. Due to predominantly weak approvability regimes, imitators tend to replicate innovation easily and may exploit the set up on a stronger chain of upstream and downstream products and suppliers and consequently tend to offer comparable products at a better price point after the head start phase. The Oater has been selling the product under patent protection since the beginning of 2023. The patent protection is retroactive but was not issued until August 2025. Hence, the head start phase has already begun, and is most likely endangered through the patent publication by giving imitators potential access to the technology that they otherwise would not have been aware about or would have had to get access to by buying/renting the product. The latter may be hindered by strong protection claims in leasing contracts. Summing up, only one of the three prerequisites for innovation benefit are present, the head-start phase was not influenced by the patent process and, lastly, imitators might even benefit from the patent publication. That is a bitter pill to swallow. On the other hand the patent recognized The Oater’s right to use its technology even if imitators would copy it and would apply for a patent themselves. From Teece’s point of view, patenting would not have had any influence on whether The Oater could have converted its innovation into an economic advantage or not. Let’s now shift gears and focus on the patent from an investor’s point of view. ",
     "url": "/docs/blog/the-oater-is-patented/#reviewing-the-oaters-innovation-appropriability-regime-and-market-power",
     
     "relUrl": "/docs/blog/the-oater-is-patented/#reviewing-the-oaters-innovation-appropriability-regime-and-market-power"
-  },"245": {
+  },"248": {
     "doc": "The Oater is patented",
     "title": "A different viewpoint: IP as a signaling device for investors",
     "content": "For institutional investors and VCs, patents matter not primarily for enforcement (which rarely occurs at the startup stage) but because of their signaling effect. Patents proof the degree of innovation that is most likely claimed in any pitch deck. They also serve as a third-party validation, where knowledgeable examiners approve the work outside of the two party startup - investor interaction. A patent therefore is a viable asset of a company and worth money. In essence, IP is third-party proof-of-work. In ecosystems where due diligence is fast and asymmetric, patents lend credibility through an unbiased examiner. A patent-backed company is more likely to protect its technological edge and offer differentiated customer value. ",
     "url": "/docs/blog/the-oater-is-patented/#a-different-viewpoint-ip-as-a-signaling-device-for-investors",
     
     "relUrl": "/docs/blog/the-oater-is-patented/#a-different-viewpoint-ip-as-a-signaling-device-for-investors"
-  },"246": {
+  },"249": {
     "doc": "The Oater is patented",
     "title": "The time to file was yesterday. Yesterday four years ago.",
     "content": "The Oater’s path—from initial submission through DPMA and EPO review cycles, to final approval—demonstrates the slow grind of patent offices. Founders who postpone IP until after traction miscalculate lead times. To have an impact on evaluation during Series A fundraising or exit negotiations, filing must begin 24–30 months in advance. Add another 6–12 months for invention maturity and drafting, and the full cycle reaches 3–4 years. As this process is mostly dependent on the lead time of authorities, there is no real way to accelerate the process for a company. This clashes with most startups’ 12-month planning horizons. ",
     "url": "/docs/blog/the-oater-is-patented/#the-time-to-file-was-yesterday-yesterday-four-years-ago",
     
     "relUrl": "/docs/blog/the-oater-is-patented/#the-time-to-file-was-yesterday-yesterday-four-years-ago"
-  },"247": {
+  },"250": {
     "doc": "The Oater is patented",
     "title": "IP is expensive, slow, and mostly optional",
     "content": "Most patents are never enforced, often denied or narrowed and, even when granted, they do not generate revenue! Yet, process cost is unavoidable. Plan with a budget of around 50,000 EUR per full cycle, excluding recurring costs for upholding the patent in various states. Costs may include drafting, legal opinions, translations (three languages are compulsory for patents filed at the EPO), research fees as well as the continuous support of a law firm that helps to navigate the delicate process of patent application. So what should startups do? With my limited knowledge from filing two patents at DPMA and the EPO for The Oater, I suggest to: . | Think strategically – file only when core IP is your single source of revenue. | Start early – otherwise IP might not considered in the company’s evaluation in a fundraising round. | Budget realistically – account at least around 50,000 EUR for a full cycle with recurring costs after patent approval depending on the number of countries in which the innovator wishes to maintain its patent protection. | Know your audience – patents aren’t for customers, and they aren’t for you either. They’re for partners, acquirers, and VCs. | . The Oater is proud of its patent! But prouder still that The Oater treated IP as part of its long-term value architecture, putting in the effort three years ago and now finally brining it to fruition. ",
     "url": "/docs/blog/the-oater-is-patented/#ip-is-expensive-slow-and-mostly-optional",
     
     "relUrl": "/docs/blog/the-oater-is-patented/#ip-is-expensive-slow-and-mostly-optional"
-  },"248": {
+  },"251": {
     "doc": "The Oater is patented",
     "title": "Looking ahead",
-    "content": "Want to read our patent? Look it up here: . | DPMA Register – File No. 102023101947 | EPO Register – File No. 24153444 | . ",
+    "content": "Want to read the patent? Look it up here: . | DPMA Register – File No. 102023101947, date of publication: July 24th, 2025 | EPO Register – File No. 4417300, date of publication: August 27th, 2025 | . But we are not done yet. For the next nine months to come, until April 24th, 2026 at DPMA and May 27th, 2026 at EPO an opposition may be filed against the patent. The patents will then remain valid for the next 18-something years to come. Stay excited! . ",
     "url": "/docs/blog/the-oater-is-patented/#looking-ahead",
     
     "relUrl": "/docs/blog/the-oater-is-patented/#looking-ahead"
-  },"249": {
+  },"252": {
     "doc": "The Oater is patented",
     "title": "References",
     "content": "David J. Teece, Profiting from Technological Innovation: Implications for Integration, Collaboration, Licensing and Public Policy, Research Policy, 1986. A foundational paper explaining why control over complementary assets and timing determines whether innovators capture value from innovation. ",
     "url": "/docs/blog/the-oater-is-patented/#references",
     
     "relUrl": "/docs/blog/the-oater-is-patented/#references"
-  },"250": {
+  },"253": {
     "doc": "The Oater is patented",
     "title": "The Oater is patented",
     "content": " ",
     "url": "/docs/blog/the-oater-is-patented/",
     
     "relUrl": "/docs/blog/the-oater-is-patented/"
-  },"251": {
+  },"254": {
     "doc": "Typography",
     "title": "Typography Utilities",
     "content": " ",
     "url": "/docs/utilities/typography/#typography-utilities",
     
     "relUrl": "/docs/utilities/typography/#typography-utilities"
-  },"252": {
+  },"255": {
     "doc": "Typography",
     "title": "Table of contents",
     "content": ". | Font size | Font weight | Line height | Text justification | . ",
     "url": "/docs/utilities/typography/#table-of-contents",
     
     "relUrl": "/docs/utilities/typography/#table-of-contents"
-  },"253": {
+  },"256": {
     "doc": "Typography",
     "title": "Font size",
     "content": "Use the .fs-1 - .fs-10 to set an explicit font-size. | Class | Small screen size font-size | Large screen size font-size | . | .fs-1 | 9px | 10px | . | .fs-2 | 11px | 12px | . | .fs-3 | 12px | 14px | . | .fs-4 | 14px | 16px | . | .fs-5 | 16px | 18px | . | .fs-6 | 18px | 24px | . | .fs-7 | 24px | 32px | . | .fs-8 | 32px | 38px | . | .fs-9 | 38px | 42px | . | .fs-10 | 42px | 48px | . Font size 1 . Font size 2 . Font size 3 . Font size 4 . Font size 5 . Font size 6 . Font size 7 . Font size 8 . Font size 9 . Font size 10 . In Markdown, use the `{: }` wrapper to apply custom classes: Font size 1 {: .fs-1 } Font size 2 {: .fs-2 } Font size 3 {: .fs-3 } Font size 4 {: .fs-4 } Font size 5 {: .fs-5 } Font size 6 {: .fs-6 } Font size 7 {: .fs-7 } Font size 8 {: .fs-8 } Font size 9 {: .fs-9 } Font size 10 {: .fs-10 } . ",
     "url": "/docs/utilities/typography/#font-size",
     
     "relUrl": "/docs/utilities/typography/#font-size"
-  },"254": {
+  },"257": {
     "doc": "Typography",
     "title": "Font weight",
     "content": "Use the .fw-300 - .fw-700 to set an explicit font-weight. Font weight 300 . Font weight 400 . Font weight 500 . Font weight 700 . In Markdown, use the `{: }` wrapper to apply custom classes: Font weight 300 {: .fw-300 } Font weight 400 {: .fw-400 } Font weight 500 {: .fw-500 } Font weight 700 {: .fw-700 } . ",
     "url": "/docs/utilities/typography/#font-weight",
     
     "relUrl": "/docs/utilities/typography/#font-weight"
-  },"255": {
+  },"258": {
     "doc": "Typography",
     "title": "Line height",
     "content": "Use the lh- classes to explicitly apply line height to text. | Class | line-height value | Notes | . | .lh-0 | 0 |   | . | .lh-tight | 1.1 | Default for headings | . | .lh-default | 1.4 | Default for body (paragraphs) | . No Line height No Line height . Tight line height Tight line height . Default line height Default line height . In Markdown, use the `{: }` wrapper to apply custom classes: No Line height No Line height {: .lh-0 } Tight line height Tight line height {: .lh-tight } Default line height Default line height {: .fh-default } . ",
     "url": "/docs/utilities/typography/#line-height",
     
     "relUrl": "/docs/utilities/typography/#line-height"
-  },"256": {
+  },"259": {
     "doc": "Typography",
     "title": "Text justification",
     "content": "By default text is justified left. Use these text- classes to override settings: . | Class | What it does | . | .text-left | text-align: left | . | .text-right | text-align: right | . | .text-center | text-align: center | . ",
     "url": "/docs/utilities/typography/#text-justification",
     
     "relUrl": "/docs/utilities/typography/#text-justification"
-  },"257": {
+  },"260": {
     "doc": "Typography",
     "title": "Typography",
     "content": " ",
     "url": "/docs/utilities/typography/",
     
     "relUrl": "/docs/utilities/typography/"
-  },"258": {
+  },"261": {
     "doc": "Typography",
     "title": "Typography",
     "content": " ",
     "url": "/docs/ui-components/typography/",
     
     "relUrl": "/docs/ui-components/typography/"
-  },"259": {
+  },"262": {
     "doc": "Typography",
     "title": "Table of contents",
     "content": ". | Font stack | Responsive type scale | Headings | Body text | Inline elements | Typographic Utilities | . ",
     "url": "/docs/ui-components/typography/#table-of-contents",
     
     "relUrl": "/docs/ui-components/typography/#table-of-contents"
-  },"260": {
+  },"263": {
     "doc": "Typography",
     "title": "Font stack",
     "content": "By default, Just the Docs uses a native system font stack for sans-serif fonts: . system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Segoe UI Emoji\" . ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz . For monospace type, like code snippets or the &lt;pre&gt; element, Just the Docs uses a native system font stack for monospace fonts: . \"SFMono-Regular\", Menlo, Consolas, Monospace . ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz . ",
     "url": "/docs/ui-components/typography/#font-stack",
     
     "relUrl": "/docs/ui-components/typography/#font-stack"
-  },"261": {
+  },"264": {
     "doc": "Typography",
     "title": "Responsive type scale",
     "content": "Just the Docs uses a responsive type scale that shifts depending on the viewport size. | Selector | Small screen size font-size | Large screen size font-size | . | h1, .text-alpha | 32px | 36px | . | h2, .text-beta | 18px | 24px | . | h3, .text-gamma | 16px | 18px | . | h4, .text-delta | 14px | 16px | . | h5, .text-epsilon | 16px | 18px | . | h6, .text-zeta | 18px | 24px | . | body | 14px | 16px | . ",
     "url": "/docs/ui-components/typography/#responsive-type-scale",
     
     "relUrl": "/docs/ui-components/typography/#responsive-type-scale"
-  },"262": {
+  },"265": {
     "doc": "Typography",
     "title": "Headings",
     "content": "Headings are rendered like this: . ",
     "url": "/docs/ui-components/typography/#headings",
     
     "relUrl": "/docs/ui-components/typography/#headings"
-  },"263": {
+  },"266": {
     "doc": "Typography",
     "title": "Heading 1",
     "content": " ",
     "url": "/docs/ui-components/typography/",
     
     "relUrl": "/docs/ui-components/typography/"
-  },"264": {
+  },"267": {
     "doc": "Typography",
     "title": "Heading 2",
     "content": "Heading 3 . Heading 4 . Heading 5 . Heading 6 . # Heading 1 ## Heading 2 ### Heading 3 #### Heading 4 ##### Heading 5 ###### Heading 6 . ",
     "url": "/docs/ui-components/typography/",
     
     "relUrl": "/docs/ui-components/typography/"
-  },"265": {
+  },"268": {
     "doc": "Typography",
     "title": "Body text",
     "content": "Default body text is rendered like this: . Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ",
     "url": "/docs/ui-components/typography/#body-text",
     
     "relUrl": "/docs/ui-components/typography/#body-text"
-  },"266": {
+  },"269": {
     "doc": "Typography",
     "title": "Inline elements",
     "content": "Text can be bold, italic, or strikethrough. Link to another page. Text can be **bold**, _italic_, or ~~strikethrough~~. [Link to another page](/). ",
     "url": "/docs/ui-components/typography/#inline-elements",
     
     "relUrl": "/docs/ui-components/typography/#inline-elements"
-  },"267": {
+  },"270": {
     "doc": "Typography",
     "title": "Typographic Utilities",
     "content": "There are a number of specific typographic CSS classes that allow you to override default styling for font size, font weight, line height, and capitalization. View typography utilities . ",
     "url": "/docs/ui-components/typography/#typographic-utilities",
     
     "relUrl": "/docs/ui-components/typography/#typographic-utilities"
-  },"268": {
+  },"271": {
     "doc": "X",
     "title": "X",
     "content": "title: X parent: Ancestry . ",
     "url": "/docs/navigation/main/x/",
     
     "relUrl": "/docs/navigation/main/x/"
-  },"269": {
+  },"272": {
     "doc": "S",
     "title": "S",
     "content": "title: S parent: X . ",
     "url": "/docs/navigation/main/xs/",
     
     "relUrl": "/docs/navigation/main/xs/"
-  },"270": {
+  },"273": {
     "doc": "T",
     "title": "T",
     "content": "title: T parent: S grand_parent: X . ",
     "url": "/docs/navigation/main/xt/",
     
     "relUrl": "/docs/navigation/main/xt/"
-  },"271": {
+  },"274": {
     "doc": "U",
     "title": "U",
     "content": "title: U parent: T ancestor: X . ",
     "url": "/docs/navigation/main/xu/",
     
     "relUrl": "/docs/navigation/main/xu/"
-  },"272": {
+  },"275": {
     "doc": "Y",
     "title": "Y",
     "content": "title: Y parent: Ancestry . ",
     "url": "/docs/navigation/main/y/",
     
     "relUrl": "/docs/navigation/main/y/"
-  },"273": {
+  },"276": {
     "doc": "S",
     "title": "S",
     "content": "title: S parent: Y . ",
     "url": "/docs/navigation/main/ys/",
     
     "relUrl": "/docs/navigation/main/ys/"
-  },"274": {
+  },"277": {
     "doc": "T",
     "title": "T",
     "content": "title: T parent: S ancestor: Y . ",
     "url": "/docs/navigation/main/yt/",
     
     "relUrl": "/docs/navigation/main/yt/"
-  },"275": {
+  },"278": {
     "doc": "U",
     "title": "U",
     "content": "title: U parent: T ancestor: Y . ",

@@ -12,7 +12,8 @@ nav_order: 3
 {: .label .label-green }
 
 Did you ever wonder how to optimally pack parcels, serving customers with various subscription sizes of while avoiding a dangerous goods shipping penalty fee?
-No? Well, me neighter. Let's investigate how its done anyways! Stay with me, its worth it: We will reduce shipping cost by 40% and proove why shopping-cart bundling is worth it!
+No? Well, me neighter. Let's investigate how its done anyways!
+Stay with me, its worth it: We will reduce shipping cost by 40% just by intelligently exploiting the degressive cost-per-weight structure in today's CEP sector and show why shopping-cart bundling is worth it!
 {: .fs-6 .fw-300 }
 
 ---
@@ -110,16 +111,18 @@ Dry mix, oil, and cleaning agent are only available in a single container size.
 The cleaning agent is classified as dangerous good according to ADR 3.2 under the UN-number 1719 and thus transportation by CEP is only permitted in containers not exceeding one liters.
 
 # Methodology
-The The Oater Barista machine uses exactly 1 dry mix pouch, 1/5 of an oil bottle and 1/9 of a one liter cleaning agent bottle to produce 4.5 liters of oat drink in a single production cycle.
+The The Oater Barista machine uses exactly 1 dry mix pouch, 1/5 of an oil bottle and 1/9 of a cleaning agent bottle to produce 4.5 liters of oat drink in a single production cycle.
 Consequently
 - one pouch of dry mix is sufficient to produce 4.5 liters of oat drink
 - one bottle of oil is sufficient to produce 22.5 liters of oat drink
 - one bottle of cleaning detergent is sufficient to produce 40.5 liters of oat drink.
 
-We notice that not only the consumable goods' weights must be taken into account but the gross weight including paper pouch and bottles. While the weight difference might be neglectable for paper pouch and detergent plastic bottle, the oil is shipped in a glas bottle weighing around half of the gross oil's  weight.
-Furthermore, only complete quantities may be shipped. This causes ceiling for each subscription size and consumable. This effects mostly small subscription sizes.
+We notice that not only the consumable goods' weight must be taken into account but the gross weight including paper pouch and bottle weight. While the weight difference might be neglectable for paper pouch and detergent plastic bottle, the oil is shipped in a glas bottle making up around half of the gross oil's  weight.
+Furthermore, only complete quantities may be shipped.
+This causes ceiling for each subscription size and consumable.
+This effects mostly small subscription sizes.
 
-Given that The Oater Barista with a known customer's subscription size and a known shipping-cost-to-weight vector and known its dangerous goods penalty, as well known costs for warehousing service we want to find the packing rule that yields minimal logistics costs.
+Given a known customer's subscription size and a known shipping-cost-to-weight vector and known dangerous goods penalty, as well known costs for warehousing service we want to find the packing rule that yields minimal logistics costs.
 We assume that girth size is never a limiting factor due to the high density of the individual products.
 
 As a starting point we place all cleaning agent bottles in a single parcel so that the penalty is only paid once.
@@ -127,14 +130,88 @@ However, the discreet nature of the different weith of the product classes means
 Furthermore, the degressive cost structure of shipping costs makes it more attractive to pack two medium-weight packages than one very heavy and one light package.
 It renders obvious that there is no simple heuristic or packing instruction that guarantees minimal shipping costs. We will therefore proceed to mathematical optimization to minimize shipping cost.
 
-Mathematical optimization, also known as mathematical programming is the art of selecting of the best solution, given a set of conditions that have to hold true, no matter what (equality constraints) as well as a set of conditions that may vary in a given range (inequality constraints).
-The nature of the variables involved in the cost function and in the constraints define the problem category and thus the solution approach. Mathematical programming is used everywhere, from routing problems, AI training and shipping cost optimization to advanced process control and has equal origins in the chemical engineering community as well as in operations research. Mathematical optimization has emerget to provide solution strategies to deal with bi-level problems (optimization problems that are subject to another optimization problem), uncertainty (both stochastic and worst case) as well as many more "special" cases. It takes a lifetime to attempt to learn all about it. The interested reader is directed to my former Professor Stratos Pistikopoulos who I taught me optimization [Parametric](https://parametric.tamu.edu/) as well as his collegues in the field.
-We will skip most of the basics and assume a sound background in optimization.
-Furthermore I suggest reading articles in [CACE](https://www.sciencedirect.com/journal/computers-and-chemical-engineering), a great journal to follow and inspire how engineering problems are solved via optimization.
+**Mathematical optimization**, also known as mathematical programming is the art of selecting of the best solution, given a set of conditions that have to hold true (equality constraints) as well as a set of conditions that may vary in a given range (inequality constraints).
+The nature of the variables involved in the cost function and in the constraints define the problem category and thus the solution approach. Mathematical programming is used everywhere, from routing problems, AI training and shipping cost optimization to advanced process control and has equal origins in the chemical engineering community as well as in operations research. Mathematical optimization has emerget to provide solution strategies to deal with bi-level problems (optimization problems that are subject to another optimization problem), uncertainty (both stochastic and worst case) as well as many more "special" cases.
+It takes more than a lifetime to learn all about it.
+The interested reader is directed to my former Professor Stratos Pistikopoulos who taught me optimization (see [Parametric](https://parametric.tamu.edu/)) as well as his dear collegues in the field such as Professor Alexander Mitsos (see [SVT](https://www.avt.rwth-aachen.de/cms/AVT/Forschung/Systemverfahrenstechnik/~ipqz/Prozessregelung/lidx/1/)). Furthermore I suggest reading articles in [CACE](https://www.sciencedirect.com/journal/computers-and-chemical-engineering), and [EJOR](https://www.sciencedirect.com/journal/european-journal-of-operational-research), both great journal to follow and inspire how engineering problems are solved via optimization.
 
-# Solution strategy
+## Cost of goods
+We base the solution algorithm on the price per liter of produced oat drink and define a known monthly subscription model size $$a$$.
+The known number of oat packs $$N_T$$, oil bottles $$N_O$$ and cleaning agent bottles $$N_R$$ are consequently given by ceiling to the largest natural number that statisfies $$a$$:
+- $$ N_T =  \left\lceil a/4.5 \right\rceil $$
+- $$ N_O = \left\lceil a/22.5 \right\rceil $$
+- $$ N_R = \left\lceil a/40.5 \right\rceil $$
+
+where $$ N_T, N_O, N_R \in \mathbb{N} $$. Consequently the number of species subject to optimization is $$N_S=3$$.
+Each item has a known weight $$w = [w_T, w_O, w_R]^\top$$ in kilo gram, and a known cost-per-piece $$c = [c_T, c_O, c_R]^\top$$ in Euro.
+
+
+## Carrier cost
+Carrier cost can be obtained by the multiplication of a cost-per-weight vector with a distribution matrix holding the content of each parcel.
+
+### Shipping cost vector
+The shipping cost vector holds the price-per-parcel within the associated shipping weight class.
+We remove 1.5 kg from each parcel to account for carton and filling weight.
+
+$$
+V =
+\begin{bmatrix}
+SC^\top & SW^\top \\
+\end{bmatrix} =
+\begin{bmatrix}
+0     & 0 \\
+3.62  & 1.5 \\
+4.17  & 3.5 \\
+4.83  & 8.5 \\
+6.30   & 13.5 \\
+6.85  & 18.5 \\
+7.02  & 23.5 \\
+7.29  & 30
+\end{bmatrix}
+$$
+
+The length of $$\mathbf{v}$$ is the number of different weight/cost categories provided by the CEP, here $$N_\mathbf{v} = 8$$, as we include the null-weight/cost as a convenient way to attribute zero cost associated with an empty, never packed parcel.
+Last we define the dangerous goods shipping cost penalty as $$\phi=3.5$$ as a one-time fee added to each parcel that contains $$\geq1$$ cleaning detergent bottles.
+
+### Parcel content and weight
+In oder to calculate the weight efficiently we introduce the distribution matrix $$D \in [N_S, N_T+N_O+N_R] $$ holding the number of items per species per parcel. As an upper bound for the number of parcels necessary to ship all items we conveniently use the sum of all individual items.
+Additionally, we introduce the cost category matrix $$C \in [N_V, N_T+N_O+N_R]$$ a zero-matrix consisting of zeros exept for the respective cost category of each parcel denoted with a $$1$$.
+We lastly define a penalty vector $$P \in [N_T+N_O+N_R]$$ holding zeros for each parcel except for the parcel that hold $$\geq1$$ cleaning detergent bottles.
+
+## Warehouse cost
+Warehouse cost assume that each subscription triggers only one monthly "warehouse run", even if the total shopping cart is then packed in more than one parcel.
+For ease of understanding we separate the warehouse cost $$c_{\text{warehouse}}$$ into $$c_{\text{3PL}}$$ as well as $$c_{parcel}$$:
+
+- $$ c_{\text{warehouse}} = c_{3PL}+c_{\text{parcel}} $$
+- $$ c_{\text{3PL}} = c_A + c_P \cdot N_S $$
+- $$ c_{\text{parcel}} = c_p \cdot \sum^P \sum^C C_{c,p} $$
+
+where $$c_A$$ is the per-order administration fee and $$c_P$$ is the per-pick fee. Both fees are known and warehouse provider dependent.
+$$c_p$$ is a warehouse provider dependent cost associated with carton, filling and freight farwarding of each parcel and is thus multiplied with the number of parcels that servce the monthly subscription.
+To conveniently grasp the number of parcels we rely on $$C$$.
+
+## Solution strategy
+### Cost function
+The cost to serve (CTS) of one liter of oat-drink is the cost of goods $$CG$$, the carrier cost $$CC$$ and the warehouse cost $$WC$$:
+
+$$\min \frac{1}{a} (CG + CC + WC)$$
+
+becoming
+
+$$\min$$
+
+when inserting the introduced variables.
 
 
 # Results and discussion
+
+<figure id="fig-shipping-cost-vector">
+  <img src="/assets/images/shipping-cost-vector.svg" alt="Shipping cost vector">
+  <figcaption><strong>Figure 1:</strong> Shipping cost optimization vector diagram.</figcaption>
+</figure>
+
+As shown in [Figure 1](#fig-shipping-cost-vector), the cost flow starts from...
+
+
 
 # References

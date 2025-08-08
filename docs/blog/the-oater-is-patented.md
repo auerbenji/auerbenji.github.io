@@ -7,12 +7,15 @@ nav_order: 2
 # Great news: The Oater is patent approved!
 {: .no_toc }
 {: .d-inline-block }
-07-04-2025
+07-24-2025
 {: .label .label-green }
 
-On August XXrd, 2025, The Oater received final patent approval for its long standing patent application at the [DPMA](https://www.dpma.de/) from January 23rd, 2023.
-This is the kind of milestone that feels big - until you realize it took over 30 months from the submission to acceptance.
+On July 24th, 2025, [The Oater](https://oater.de/) received its final patent approval for its long standing patent application at the [DPMA](https://www.dpma.de/) from January 26th, 2023.
+Furthermore, The Oater received approval at the [EPO](https://www.epo.org/en) on August 27th, 2025.
+This feels big - however, it took 30 months from submission to acceptance.
 Multiple rounds of review, examiner reports, claim adjustments, and substantial costs were involved.
+{: .fs-6 .fw-300 }
+
 So why go through it?
 Why should startups — resource-constrained by design — spend time and capital on intellectual property?
 And could that money have been used more effectively elsewhere?
@@ -102,9 +105,11 @@ So what should startups do? With my limited knowledge from filing two patents at
 The Oater is proud of its patent! But prouder still that The Oater treated IP as part of its **long-term value architecture**, putting in the effort three years ago and now finally brining it to fruition.
 
 # Looking ahead
-Want to read our patent? Look it up here:
-- [DPMA Register – File No.](https://register.dpma.de/DPMAregister/pat/basis) 102023101947
-- [EPO Register – File No.](https://data.epo.org/publication-server) 24153444
+Want to read the patent? Look it up here:
+- [DPMA Register – File No.](https://register.dpma.de/DPMAregister/pat/basis) 102023101947, date of publication: July 24th, 2025
+- [EPO Register – File No.](https://data.epo.org/publication-server) 4417300, date of publication: August 27th, 2025
+
+But we are not done yet. For the next nine months to come, until April 24th, 2026 at DPMA and May 27th, 2026 at EPO an opposition may be filed against the patent. The patents will then remain valid for the next 18-something years to come. Stay excited!
 
 # References
 **David J. Teece**, [*Profiting from Technological Innovation: Implications for Integration, Collaboration, Licensing and Public Policy*](https://doi.org/10.1016/0048-7333(86)90027-2), Research Policy, 1986.
