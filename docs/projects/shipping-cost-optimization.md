@@ -14,6 +14,7 @@ nav_order: 3
 Did you ever wonder how to optimally pack parcels, serving customers with various subscription sizes of while avoiding a dangerous goods shipping penalty fee?
 No? Well, me neighter. Let's investigate how its done anyways!
 Stay with me, its worth it: We will reduce shipping cost by 40% just by intelligently exploiting the degressive cost-per-weight structure in today's CEP sector and show why shopping-cart bundling is worth it!
+We will then end on a generalizing note, rediscovering the knapsack problem along the way.
 {: .fs-6 .fw-300 }
 
 ---
@@ -137,12 +138,12 @@ The interested reader is directed to my former Professor Stratos Pistikopoulos w
 
 ## Cost of goods
 We base the solution algorithm on the price per liter of produced oat drink and define a known monthly subscription model size $$a$$.
-The known number of oat packs $$N_T$$, oil bottles $$N_O$$ and cleaning agent bottles $$N_R$$ are consequently given by ceiling to the largest natural number that statisfies $$a$$:
+The known number of oat packs $$N_T$$, oil bottles $$N_O$$ and cleaning agent bottles $$N_R$$ are consequently given by ceiling to the largest natural number that statisfies $$a$$ and are stored in $$N$$:
 - $$ N_T =  \left\lceil a/4.5 \right\rceil $$
 - $$ N_O = \left\lceil a/22.5 \right\rceil $$
 - $$ N_R = \left\lceil a/40.5 \right\rceil $$
 
-where $$ N_T, N_O, N_R \in \mathbb{N} $$. Consequently the number of species subject to optimization is $$N_S=3$$.
+where $$ N = [N_T \quad N_O \quad N_R] \in \mathbb{N^3} $$. Consequently the number of species subject to optimization is $$N_S=3$$.
 Each item has a known weight $$w = [w_T, w_O, w_R]^\top$$ in kilo gram, and a known cost-per-piece $$c = [c_T, c_O, c_R]^\top$$ in Euro.
 
 
@@ -156,8 +157,8 @@ We remove 1.5 kg from each parcel to account for carton and filling weight.
 $$
 V =
 \begin{bmatrix}
-SC^\top & SW^\top \\
-\end{bmatrix} =
+SC & SW \\
+\end{bmatrix}^\top =
 \begin{bmatrix}
 0     & 0 \\
 3.62  & 1.5 \\
@@ -167,51 +168,107 @@ SC^\top & SW^\top \\
 6.85  & 18.5 \\
 7.02  & 23.5 \\
 7.29  & 30
-\end{bmatrix}
+\end{bmatrix}^\top
 $$
 
-The length of $$\mathbf{v}$$ is the number of different weight/cost categories provided by the CEP, here $$N_\mathbf{v} = 8$$, as we include the null-weight/cost as a convenient way to attribute zero cost associated with an empty, never packed parcel.
+The length of $$V$$ is the number of different weight/cost categories provided by the CEP, here $$N_V= 8$$, as we include the null-weight/cost as a convenient way to attribute zero cost associated with an empty, never packed parcel.
 Last we define the dangerous goods shipping cost penalty as $$\phi=3.5$$ as a one-time fee added to each parcel that contains $$\geq1$$ cleaning detergent bottles.
 
 ### Parcel content and weight
-In oder to calculate the weight efficiently we introduce the distribution matrix $$D \in [N_S, N_T+N_O+N_R] $$ holding the number of items per species per parcel. As an upper bound for the number of parcels necessary to ship all items we conveniently use the sum of all individual items.
-Additionally, we introduce the cost category matrix $$C \in [N_V, N_T+N_O+N_R]$$ a zero-matrix consisting of zeros exept for the respective cost category of each parcel denoted with a $$1$$.
-We lastly define a penalty vector $$P \in [N_T+N_O+N_R]$$ holding zeros for each parcel except for the parcel that hold $$\geq1$$ cleaning detergent bottles.
+In oder to calculate the weight efficiently we introduce the distribution matrix $$D \in [N_S, N_T+N_O+N_R=N_L] $$ holding the number of items per species per parcel. As an upper bound for the number of parcels necessary to ship all items we conveniently use the sum of all individual items.
+Additionally, we introduce the cost category matrix $$C \in [N_V, N_L]$$ a zero-matrix consisting of zeros exept for the respective cost category of each parcel denoted with a $$1$$.
+We lastly define a penalty vector $$\Phi \in [N_L]$$ holding zeros for each parcel except for ones for the parcel that hold $$\geq1$$ cleaning detergent bottles. Consequently $$\Phi$$ is a binary optimization variable.
 
 ## Warehouse cost
 Warehouse cost assume that each subscription triggers only one monthly "warehouse run", even if the total shopping cart is then packed in more than one parcel.
-For ease of understanding we separate the warehouse cost $$c_{\text{warehouse}}$$ into $$c_{\text{3PL}}$$ as well as $$c_{parcel}$$:
+For ease of understanding we separate the warehouse cost $$c_{\text{warehouse}}$$:
 
 - $$ c_{\text{warehouse}} = c_{3PL}+c_{\text{parcel}} $$
 - $$ c_{\text{3PL}} = c_A + c_P \cdot N_S $$
 - $$ c_{\text{parcel}} = c_p \cdot \sum^P \sum^C C_{c,p} $$
 
-where $$c_A$$ is the per-order administration fee and $$c_P$$ is the per-pick fee. Both fees are known and warehouse provider dependent.
+where $$c_A$$ is the per-subscription order administration fee and $$c_P$$ is the per-pick fee. Both fees are known and warehouse provider dependent.
 $$c_p$$ is a warehouse provider dependent cost associated with carton, filling and freight farwarding of each parcel and is thus multiplied with the number of parcels that servce the monthly subscription.
 To conveniently grasp the number of parcels we rely on $$C$$.
 
-## Solution strategy
-### Cost function
-The cost to serve (CTS) of one liter of oat-drink is the cost of goods $$CG$$, the carrier cost $$CC$$ and the warehouse cost $$WC$$:
+## Cost function
+The cost to serve ($$CTS$$) of one liter of oat-drink is the sum of the cost of goods $$CG$$, the carrier cost $$CC$$ and the warehouse cost $$WC$$:
 
-$$\min \frac{1}{a} (CG + CC + WC)$$
+$$CTS(V,\phi) = \min_{D,\Phi,C} \frac{1}{a} (CG + CC + WC)$$
 
-becoming
+and are a function of the shipping-cost vector and the penalty fee. We assume $$N$$ not to be subject to optimization. Inserting the discrete terms for each associated cost the cost function becomes
 
-$$\min$$
 
-when inserting the introduced variables.
+$$CTS(V,\phi) = \min_{D,\Phi,C} \frac{1}{a} (N \cdot c + \sum^C\sum^P SC_c \cdot C_{c,p} + \sum^P \phi \cdot \Phi_p + c_A + c_P \cdot N_S + c_p \cdot \sum^C \sum^P C_{c,p}) $$
+
+We optimize for the lowest possible cost to serve and calculate the fractions of $$CG, CC, WC$$ in post-processing.
+
+## Shipping cost problem
+
+The shipping cost problem is given as
+
+$$
+\begin{align}
+CTS(V,\phi) &= \min_{D,\Phi,C} \frac{1}{a} (N \cdot c + \sum^C\sum^P SC_c \cdot C_{c,p} + \sum^P \phi \cdot \Phi_p + c_A + c_P \cdot N_S + c_p \cdot \sum^C \sum^P C_{c,p}) \tag{a}\\
+\text{s. t.} \quad \sum^P D_{s,p} &= N_s \quad \forall s \in S \tag{b}\\
+\sum^C C_{c,p} &= 1 \quad \forall p \in P \tag{c}\\
+\sum^S D_{s,p} \cdot w_s &\leq SW_1 \cdot C_{1,p} + SW_{N_V} \cdot (1 - C_{1,p}) \quad \forall p \in P \tag{d}\\
+SW_{c-1} \cdot C_{c,p} &\leq \sum^S D_{s,p} \cdot w_s \quad \forall p \in P, c \in C \setminus [1] \tag{e}\\
+\sum^S D_{s,p} \cdot w_s &\leq SW_c \cdot C_{c,p} + SW_{N_V} \cdot (1 - C_{c,p}) \quad \forall p \in P, c \in C \setminus [1] \tag{f}\\
+D_{N_S,p} &\leq N_R \cdot \Phi_p \quad \forall p \in P \tag{g}
+\end{align}
+$$
+
+Equation (b) guarantees that all items are shipped to the customer and equation (c) ensures only one weight category may be selected.
+Equation (d) serves a double purpose: first it provides a null-cost category, representing an empty and thus unshipped parcel. Additionally, in case the parcel is not empty, the maximum admmidable parcel weight is set as an upper bound.
+Equation (e,f) finally select the correct cost category.
+Notice that equation (e)'s the RHS of equation (e) is the LHS of equation (f).
+The statement is split and then handed to the optimizer.
+Lastly equation (g) sets the penalty pin in case cleaning detergent is shipped.
+Notice that the cost function then sums over all penalty pins.
+
+### Solution strategy
+The shipping cost problem holds linear terms as well as integer decision variables only.
+While $$D$$ holds an integer decision variables; $$C, \Phi$$ hold binary decision variables.
+Thus, the shipping cost problem is an integer programming problem and can be solved with standard IP solvers.
+The problem was solved with Gurobi Optimizer version 10.0.3 on an Apple M3 Pro SoC running 12 threads with 18GB RAM in Visual Studio version 1.101.2. The model consists of 1140 integer decision variables of which 855 are binaries for a subscription size of 320 liters.
+Although the model holds $$\approx 10^3 $$ binaries, $$M \leq 1e-5$$ in the big-M constraint $$y \leq Mb$$, thus we omit setting Gurobis IntegralityFocus parameter saving runtime.
+The model solved to optimality in 0.04 seconds for generation and 0.17 seconds for optimization.
+This is remarkably fast: notice shipping cost optimization extends bin packing, itself an extension of the NP-hard knapsack problem.
+The subscription size of 1000 liters per month size was solved to optimality in 0.10 seconds for generation and 0.83 seconds for optimization.
+Consequently we will not investigate runtime improvement through problem reformulation noting that Gurobi does an excellent job at presolving and facilitating the problem before optimization.
+
+{: .note-title }
+> Information
+>
+> I will add a follow-up investigating runtime, solving the shipping cost problem in Julia using JuMP, ORTools CP-SAT and HiGHS. Come back later. Not that my publication on [flexibility](https://auerbenji.github.io/docs/publications/algorithmic-advances-in-flexibility-analysis/) already investigated the reformulation of big-M constraints, using SOS1 constraints instead.
 
 
 # Results and discussion
 
-<figure id="fig-shipping-cost-vector">
-  <img src="/assets/images/shipping-cost-vector.svg" alt="Shipping cost vector">
-  <figcaption><strong>Figure 1:</strong> Shipping cost optimization vector diagram.</figcaption>
+<figure id="fig-cost-by-cat">
+  <img src="/assets/images/cost-of-species.svg" alt="Cost by category">
+  <figcaption><strong>Figure 1:</strong> Shipping cost optimization: cost by category</figcaption>
 </figure>
 
-As shown in [Figure 1](#fig-shipping-cost-vector), the cost flow starts from...
+[Figure 1](#fig-cost-by-cat) shows the cost by categoy and its proportion.
 
 
+
+<figure id="fig-relative-savings">
+  <img src="/assets/images/relative-savings.svg" alt="Relative warehouse and carrier savings">
+  <figcaption><strong>Figure 2:</strong> Shipping cost optimization: relative warehouse and carrier savings</figcaption>
+</figure>
+
+[Figure 2](#fig-cost-by-cat) shows the relative savings for warehouse and carrier.
+
+
+
+<figure id="fig-cost-by-cat">
+  <img src="/assets/images/parcel-value.svg" alt="Levelized parcel value">
+  <figcaption><strong>Figure 3:</strong> Shipping cost optimization: levelized parcel value.</figcaption>
+</figure>
+
+[Figure 3](#fig-parcel-value) shows the levelized parcel value and the number of parcels that serve the subscription model.
 
 # References
