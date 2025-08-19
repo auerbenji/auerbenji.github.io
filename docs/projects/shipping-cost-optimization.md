@@ -159,7 +159,7 @@ Each item has a known weight $$w = [w_T, w_O, w_R]^\top$$ in kilo gram, and a kn
 Carrier cost can be obtained by the multiplication of a cost-per-weight vector with a distribution matrix holding the content of each parcel.
 
 ### Shipping cost vector
-The shipping cost vector holds the price-per-parcel within the associated shipping weight class.
+The shipping cost vector $$V$$ holds the price-per-parcel within the associated shipping weight class.
 We remove 1.5 kg from each parcel to account for carton and filling weight.
 
 $$
@@ -178,6 +178,16 @@ SC & SW \\
 7.29  & 30
 \end{bmatrix}^\top
 $$
+
+For better understanding [figure 1](#fig-cost-by-cat) visualizes the piecewise linear nature of $$V$$, mapping parcel cost to weight.
+The blue curve plots the parcel cost over the admissable parcel weight.
+Notice that a flat slope indicates a good weight to cost ratio.
+The cost per weight are steadily decreasing, making heavy parcels most efficient.
+
+<figure id="fig-cost-by-cat">
+  <img src="/assets/images/V-vector.svg" alt="Shipping cost vector">
+  <figcaption><strong>Figure 1:</strong> Shipping cost vector: parcel and per weight cost.</figcaption>
+</figure>
 
 The length of $$V$$ is the number of different weight/cost categories provided by the CEP, here $$N_V= 8$$, as we include the null-weight/cost as a convenient way to attribute zero cost associated with an empty, never packed parcel.
 Last we define the dangerous goods shipping cost penalty as $$\phi=3.5$$ as a one-time fee added to each parcel that contains $$\geq1$$ cleaning detergent bottles.
@@ -258,14 +268,14 @@ Consequently we will not investigate runtime improvement through problem reformu
 
 # Results and discussion
 
-[Figure 1](#fig-cost-by-cat) shows the cost by categoy their share of the total cost to serve.
+[Figure 2](#fig-cost-by-cat) shows the cost by categoy their share of the total cost to serve.
 The horizontal axis of the figure represents the monthly subscription size
 The cost to serve $$CTS$$, warehouse cost $$CW$$ and carrier cost $$CC$$ are represented by solid lines and represented on the left y-axis.
 The proportions of the cost of goods $$\frac{CG}{CTS}$$, warehouse cost $$\frac{CW}{CTS}$$ and carrier cost $$\frac{CC}{CTS}$$ are represented by dashed lines and represented on the right y-axis.
 
 <figure id="fig-cost-by-cat">
   <img src="/assets/images/cost-of-species.svg" alt="">
-  <figcaption><strong>Figure 1:</strong> Shipping cost optimization: cost by category</figcaption>
+  <figcaption><strong>Figure 2:</strong> Shipping cost optimization: cost by category</figcaption>
 </figure>
 
 The cost to serve approach a steady state starting from monthly subscription sizes of around 500 liters and more.
@@ -273,14 +283,14 @@ The per-liter cost of goods are almost identical, ignoring the ceiling effect.
 Thus when a steady-state $$CTS$$ is reached, this can only be achieved through a steady state in warehouse and carrier costs.
 The overall $$CTS$$ savings are $$18.3\%$$ when comparing the most unfortunate subscription size of 100 liters per month with the best possible subsciption size of 920 liters per month.
 
-To further investigate this issue [figure 2](#fig-cost-by-cat) shows the relative savings for warehouse ($$\eta_W$$) and carrier ($$\eta_C$$).
+To further investigate this issue [figure 3](#fig-cost-by-cat) shows the relative savings for warehouse ($$\eta_W$$) and carrier ($$\eta_C$$).
 We use 80 liters as a base case as this reflects the smallest currently available subscription size at The Oater.
-The findings from [figure 1](#fig-cost-by-cat) are verified.
+The findings from [figure 2](#fig-cost-by-cat) are verified.
 Also the relative savings both for warehouse and carrier cost approach a near steady-state/saturation effect starting from around 500 liters per month.
 
 <figure id="fig-relative-savings">
   <img src="/assets/images/relative-savings.svg" alt="Relative warehouse and carrier savings">
-  <figcaption><strong>Figure 2:</strong> Shipping cost optimization: relative warehouse and carrier savings</figcaption>
+  <figcaption><strong>Figure 3:</strong> Shipping cost optimization: relative warehouse and carrier savings</figcaption>
 </figure>
 
 Just by optimally bundeling goods we achieve carrier cost savings of 55.5%.
@@ -288,14 +298,14 @@ We save even more on warehouse expenses with savings of up to 74.4%.
 However, since the carrier cost are higher in absolut terms, carrier savings are more valuable to minimize cost to serve.
 
 Lastly, let's investigate the effect of shipping cost optimization from a different angle.
-[Figure 3](#fig-parcel-value) shows the levelized per-parcel value ($$LPV$$) and the number of parcels that serve the subscription model.
+[Figure 4](#fig-parcel-value) shows the levelized per-parcel value ($$LPV$$) and the number of parcels that serve the subscription model.
 As parcels are filled, $$LPV$$ increases in a predictable manner. Once an additional box must be introduced, $$LPV$$ drops sharply, which in turn reduces the overall cost efficiency of the carrier.
 This apparent loss can be mitigated by reverting to a smaller parcel category, defined by lower weight and cost, which dampens the decline in savings.
-The observed reductions in $$LPV$$ align precisely with corresponding declines in $$\eta_W$$ and $$\eta_C$$ (see [figure 2](#fig-cost-by-cat)), although the latter effect is less pronounced.
+The observed reductions in $$LPV$$ align precisely with corresponding declines in $$\eta_W$$ and $$\eta_C$$ (see [figure 3](#fig-cost-by-cat)), although the latter effect is less pronounced.
 
 <figure id="fig-cost-by-cat">
   <img src="/assets/images/parcel-value.svg" alt="Levelized parcel value">
-  <figcaption><strong>Figure 3:</strong> Shipping cost optimization: levelized parcel value.</figcaption>
+  <figcaption><strong>Figure 4:</strong> Shipping cost optimization: levelized parcel value.</figcaption>
 </figure>
 
 ## Conclusion
