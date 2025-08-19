@@ -13,7 +13,7 @@ nav_order: 3
 
 Did you ever wonder how to optimally pack parcels, serving customers with various subscription sizes of while avoiding a dangerous goods shipping penalty fee?
 No? Well, me neighter. Let's investigate how its done anyways!
-Stay with me, its worth it: We will reduce shipping cost by 40% just by intelligently exploiting the degressive cost-per-weight structure in today's CEP sector and show why shopping-cart bundling is worth it!
+Stay with me, its worth it: We will reduce shipping cost by 55% just by intelligently exploiting the degressive cost-per-weight structure in today's CEP sector and show why shopping-cart bundling is worth it!
 We will then end on a generalizing note, rediscovering the knapsack problem along the way.
 {: .fs-6 .fw-300 }
 
@@ -52,7 +52,7 @@ Companies, on the other hand, have a customer base, a range of recurring core pr
 This allows them to take advantage of transportation companies' pricing policies to arrive at the best price possible.
 In this work, we show how weight classes, dangerous goods penalties, and order bundling across multiple packages can be used to generate the most cost-effective shipping option.
 We then compare a standardized shopping cart with an optimized shopping cart:
-The results indicate a reduction of transportation costs by 40%.
+The results indicate a reduction of transportation costs by 55%.
 We then compare the variable cost proportion attributed to transportation with industry standards.
 
 ## CEP sector - weight and girth length
@@ -183,12 +183,16 @@ We lastly define a penalty vector $$\Phi \in [N_L]$$ holding zeros for each parc
 Warehouse cost assume that each subscription triggers only one monthly "warehouse run", even if the total shopping cart is then packed in more than one parcel.
 For ease of understanding we separate the warehouse cost $$c_{\text{warehouse}}$$:
 
-- $$ c_{\text{warehouse}} = c_{3PL}+c_{\text{parcel}} $$
-- $$ c_{\text{3PL}} = c_A + c_P \cdot N_S $$
-- $$ c_{\text{parcel}} = c_p \cdot \sum^P \sum^C C_{c,p} $$
+$$
+\begin{align}
+c_{\text{warehouse}} &= c_{\text{pick}}+c_{\text{parcel}} \\
+c_{\text{pick}} &= c_A + c_P \cdot N_S \\
+c_{\text{parcel}} &= c_p \cdot \sum^P \sum^C C_{c,p}
+\end{align}
+$$
 
 where $$c_A$$ is the per-subscription order administration fee and $$c_P$$ is the per-pick fee. Both fees are known and warehouse provider dependent.
-$$c_p$$ is a warehouse provider dependent cost associated with carton, filling and freight farwarding of each parcel and is thus multiplied with the number of parcels that servce the monthly subscription.
+$$c_{\text{parcel}}$$ is a warehouse provider dependent cost associated with carton, filling and freight farwarding of each parcel and is thus multiplied with the number of parcels that servce the monthly subscription.
 To conveniently grasp the number of parcels we rely on $$C$$.
 
 ## Cost function
@@ -232,7 +236,7 @@ The shipping cost problem holds linear terms as well as integer decision variabl
 While $$D$$ holds an integer decision variables; $$C, \Phi$$ hold binary decision variables.
 Thus, the shipping cost problem is an integer programming problem and can be solved with standard IP solvers.
 The problem was solved with Gurobi Optimizer version 10.0.3 on an Apple M3 Pro SoC running 12 threads with 18GB RAM in Visual Studio version 1.101.2. The model consists of 1140 integer decision variables of which 855 are binaries for a subscription size of 320 liters.
-Although the model holds $$\approx 10^3 $$ binaries, $$M \leq 1e-5$$ in the big-M constraint $$y \leq Mb$$, thus we omit setting Gurobis IntegralityFocus parameter saving runtime.
+Although the model holds $$\approx 10^3 $$ binaries, $$M \leq 1e-5$$ in $$y \leq Mb$$, thus we omit setting Gurobis IntegralityFocus parameter saving runtime.
 The model solved to optimality in 0.04 seconds for generation and 0.17 seconds for optimization.
 This is remarkably fast: notice shipping cost optimization extends bin packing, itself an extension of the NP-hard knapsack problem.
 The subscription size of 1000 liters per month size was solved to optimality in 0.10 seconds for generation and 0.83 seconds for optimization.
@@ -246,29 +250,61 @@ Consequently we will not investigate runtime improvement through problem reformu
 
 # Results and discussion
 
+[Figure 1](#fig-cost-by-cat) shows the cost by categoy their share of the total cost to serve.
+The horizontal axis of the figure represents the monthly subscription size
+The cost to serve $$CTS$$, warehouse cost $$CW$$ and carrier cost $$CC$$ are represented by solid lines and represented on the left y-axis.
+The proportions of the cost of goods $$\frac{CG}{CTS}$$, warehouse cost $$\frac{CW}{CTS}$$ and carrier cost $$\frac{CC}{CTS}$$ are represented by dashed lines and represented on the right y-axis.
+
 <figure id="fig-cost-by-cat">
-  <img src="/assets/images/cost-of-species.svg" alt="Cost by category">
+  <img src="/assets/images/cost-of-species.svg" alt="">
   <figcaption><strong>Figure 1:</strong> Shipping cost optimization: cost by category</figcaption>
 </figure>
 
-[Figure 1](#fig-cost-by-cat) shows the cost by categoy and its proportion.
+The cost to serve approach a steady state starting from monthly subscription sizes of around 500 liters and more.
+The per-liter cost of goods are almost identical, ignoring the ceiling effect.
+Thus when a steady-state $$CTS$$ is reached, this can only be achieved through a steady state in warehouse and carrier costs.
+The overall $$CTS$$ savings are $$18.3\%$$ when comparing the most unfortunate subscription size of 100 liters per month with the best possible subsciption size of 920 liters per month.
 
-
+To further investigate this issue [figure 2](#fig-cost-by-cat) shows the relative savings for warehouse and carrier.
+We use 80 liters as a base case as this reflects the smallest currently available subscription size at The Oater.
+The findings from [figure 1](#fig-cost-by-cat) are verified.
+Also the relative savings both for warehouse and carrier cost approach a near steady-state/saturation effect starting from around 500 liters per month.
 
 <figure id="fig-relative-savings">
   <img src="/assets/images/relative-savings.svg" alt="Relative warehouse and carrier savings">
   <figcaption><strong>Figure 2:</strong> Shipping cost optimization: relative warehouse and carrier savings</figcaption>
 </figure>
 
-[Figure 2](#fig-cost-by-cat) shows the relative savings for warehouse and carrier.
+Just by optimally bundeling goods we achieve carrier cost savings of $$55.5\%$$.
+We save even more on warehouse expenses with savings of up to $$74.4\%$$.
+However, since the carrier cost are higher in absolut terms, carrier savings are more valuable to minimize cost to serve.
 
-
+Lastly, let's investigate the effect of shipping cost optimization from a different angle.
+[Figure 3](#fig-parcel-value) shows the levelized per-parcel value and the number of parcels that serve the subscription model.
+As parcels are filled, the per-parcel value increases in a predictable manner. Once an additional box must be introduced, the per-parcel value drops sharply, which in turn reduces the overall cost efficiency of the carrier.
+This apparent loss can be mitigated by reverting to a smaller parcel category, defined by lower weight and cost, which dampens the decline in savings.
+The observed reductions in per-parcel value align precisely with corresponding declines in relative warehouse and carrier savings (see [figure 2](#fig-cost-by-cat)), although the latter effect is less pronounced.
 
 <figure id="fig-cost-by-cat">
   <img src="/assets/images/parcel-value.svg" alt="Levelized parcel value">
   <figcaption><strong>Figure 3:</strong> Shipping cost optimization: levelized parcel value.</figcaption>
 </figure>
 
-[Figure 3](#fig-parcel-value) shows the levelized parcel value and the number of parcels that serve the subscription model.
+## Conclusion
+A harsh negative effect of the dangerous goods surcharge is not apparent.
+Looking at $$\Phi$$, we observe that dangerous goods are only divided into two packages for subscription sizes of 940 liters or more.
+This only happens because dangerous goods required to serve subscription sizes of 940 liters and more exceed the weight limit for a single parcel.
+Bundling all cleaning detergent bottles into a single parcel indicates that the weight of a cleaning detergent bottle does not offer sufficient flexibility to achieve savings per weight through the clever filling of a package, despite the dangerous goods surcharge.
+This may be due to the fact that a cleaning detergent bottle weighs about twice as much as dry mix, whose quantity surpasses the cleaning detergent's quantify ($$N_T \approx 10 \cdot N_R$$, $$ w_T \approx 0.5 \cdot w_R$$).
+Before the cleaning detergent is used to fill up free weight, two dry mixes are utilized.
+
+In summary: optimal packing of the parcels reduces the $$CTS$$ by up to $$20\%$$ with savings in carrier costs of up to $$55\%$$.
+No particular pressure on efficiency due to the dangerous goods penalty is be confirmed.
+Note that the optimal solution is indeed identical to the simple heuristic “all cleaners in a single package.”
+Efficiency losses arise almost exclusively from adding another parcel to serve the subscription, which reduces the parcel value.
+These efficiency losses are then damped through downsizing to smaller parcel sizes, yet are still passed on to the carrier costs.
+Finally, the losses in savings effect the total costs even more dampened due to the low share of carrier costs in the $$CTS$$.
+Nevertheless, The Oater achieves significant savings through optimized shipping.
+Note that the savings in $$20\%$$ directly increase the margin. Note that on-premise oat-drink is mostly a low-margin FMCG where every decrease in $$CTS$$ with higher overall volume proves more effective than an increase in price per liter for the customer.
 
 # References
