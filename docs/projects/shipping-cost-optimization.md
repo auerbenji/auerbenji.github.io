@@ -338,3 +338,11 @@ Despite this, The Oater realizes substantial savings through optimized shipping,
 Moreover, on-premise oat drink is largely a low-margin FMCG, where decreasing the cost to serve at higher volumes is more effective than increasing the price per liter for the customer.
 The case study showed combined warehouse and carrier costs of about 20-10%, excluding returns and personnel.
 Looking at industry standards, [The Geography of Transport Systems](https://transportgeography.org/contents/chapter7/logistics-freight-distribution/ecommerce-cost-structure/?utm_source=chatgpt.com) suggests that a theoretical minimum of 10% may be achievable, though this is rarely realized in practice. In most cases, combined shares for warehouse and carrier of up to 30% seem realistic, with The Oater operating at the lower end through optimized shipping costs.
+
+# Code
+Want to get started on your own?
+Try out differenct cost vectors and penalties?
+In depth analyse the data?
+Clone my repository [here](https://github.com/auerbenji/shipping-cost-optimization).
+I provided the optimization as well as the visualization script as well as the results in a concise csv file.
+Enjoy.
