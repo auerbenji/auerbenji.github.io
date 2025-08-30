@@ -1,6 +1,6 @@
 ---
 title: About me
-nav_order: 2
+nav_order: 1
 ---
 
 # About me
@@ -29,14 +29,14 @@ When I do not work, I am traveling the world. Or I am diving. Or making pastry.
 
 
 ## Acknowledgments
-Dustin Kenefake inspired me to build this page. Make sure to have a look at his amazing projects [here](https://dkenefake.github.io/).
-Marcello Di Martino motivated and supported me to write my own publication.
+Dustin Kenefake inspired me to build this page. Dustin works as a postdoctoral researcher at the University of Delaware.
+Make sure to have a look at his amazing projects [here](https://dkenefake.github.io/).
+I am deeply grateful to Marcello Di Martino, who not only encouraged me to pursue my first scientific publication but also sparked my passion for sharing my knowledge. For several of the articles presented here, he generously served as reviewer, mentor and critical voice. Find some of Marcello's projects [here](https://scholar.google.com/citations?user=ummEBeUAAAAJ&hl=en). More than anything, I am grateful to be able to call Dustin and Marcello my close friends.
 
 
 ## What I work on
 {: .d-inline-block }
-
-New (v0.4.0)
+08-30-2025
 {: .label .label-green }
 
 ```mermaid

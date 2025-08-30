@@ -5,15 +5,15 @@ nav_order: 3
 ---
 
 
-# Abstract
+# Appetizer
 {: .no_toc }
 {: .d-inline-block }
-07-17-2025
+08-30-2025
 {: .label .label-green }
 
-Did you ever wonder how to optimally pack parcels, serving customers with various subscription sizes of while avoiding a dangerous goods shipping penalty fee?
-No? Well, me neighter. Let's investigate how its done anyways!
-Stay with me, its worth it: We will reduce shipping cost by 55% just by intelligently exploiting the degressive cost-per-weight structure in today's CEP sector and show why shopping-cart bundling is worth it!
+Did you ever wonder how to optimally pack parcels, serving customers with various subscription sizes while avoiding a dangerous goods shipping penalty fee?
+No? Well, me neihter. Let's investigate how its done anyways!
+Stay with me, its worth it: we will reduce shipping cost by 55% just by intelligently exploiting the degressive cost-per-weight structure in today's CEP sector and show why shopping-cart bundling is worth it!
 We will then end on a generalizing note, rediscovering the knapsack problem along the way.
 {: .fs-6 .fw-300 }
 
@@ -42,22 +42,20 @@ Approximately 50% of this in terms of revenue and number of shipments were deliv
 > The term CEP is the abbreviation for "Courier, Express and Parcel Services". It refers to postal and logistics companies that primarily transport consignments with comparatively low weight and volume - such as letters, small packages, documents or small items. These restrictions on dimensions and weight allow a high degree of standardisation in processing. As a result, the handling and sorting of the objects to be transported can be easily (partially) automated. In this way, consignments can be transported in a short time and with high efficiency.
 >([DHL Dictionary](https://dhl-freight-connections.com/en/logistics-dictionary/cep/))
 
-While general cargo transport is the significantly larger sector, it remains largely hidden from consumers, while they mostly experience logistics through the CEP sector e. g. through daily deliveries triggered by orders placed at online marketplaces.
+<!--> While general cargo transport is the significantly larger sector, it remains largely hidden from consumers, while they mostly experience logistics through the CEP sector e. g. through daily deliveries triggered by orders placed at online marketplaces. -->
 
-The CEP sector is highly automated and therefore cost-efficient. This is advantageous not just for consumers but especially retail that specializes in B2B or B2C business with the help of distribution through the CEP sector. Since goods are standardized, meaning that there are only a few differentiating factors, not only within a provider but also between providers, providers introduce levels within a feature to artificially force service differentiation and therefore better prices. 
-Comparing the differentiation through the category of weight as an example we notice that logistics providers offer up to seven different weight classes withing the 0-31.5 kg range decreasing cost per weight as the total weight increases.
-This work aims at leveraging the discrete and known weight classses by allocating goods to serve customers at the lowest CEP-rate possible.
+The CEP sector is highly automated, which makes it cost-efficient.
+Consumers benefit significantly from low costs, as CEP enables access to a wide range of products offered on B2B and B2C marketplaces.
+However, since differentiation among CEP providers is limited, carriers create artificial service tiers to enforce differentiation and capture better prices.
+For example, logistics providers offer up to seven distinct classes within the $$0–31.5 \text{kg}$$ range, with cost per weight decreasing as total weight increases.
+This results in a discrete buy-in to a given weight class, with any additional weight up to the class limit being effectively free, until the next buy-in at the following weight class becomes necessary.
+Other differenciation features might be present such as dangerous goods shipping fee, girth limits and more.
+This work exploits these discrete and predefined class features to allocate goods in an optimal way minimizing the cost to serve.
 
-Consumers can only accept the offers and compare between different carriers.
-Companies, on the other hand, have a customer base, a range of recurring core products and the ability to align shopping carts and delivery frequencies.
-This allows them to take advantage of transportation companies' pricing policies to arrive at the best price possible.
-In this work, we show how weight classes, dangerous goods penalties, and order bundling across multiple packages can be used to generate the most cost-effective shipping option.
-We then compare a standardized shopping cart with an optimized shopping cart:
-The results indicate a reduction of transportation costs by 55%.
-We then compare the variable cost proportion attributed to transportation with industry standards.
+Comparing a standardized shopping cart with an allocation-optimized shopping cart we reduce the carrier cost by up to 55%.
 To understand the degrees of freedom that are available for optimization we will briefly introduce the CEP and warehousing sector as well as The Oater's product portfolio and delivery frequencies.
 
-## CEP sector - weight and girth length
+## CEP sector - weight and girth length matter
 In order for the CEP sector to operate in a particularly cost-efficient manner and offer low prices to consumers, it is highly standardized with parcels meeting strict criteria in order to be processed as CEP.
 Three criterias are always applicable:
 - weight with most transportation companies delivering parcels up to 31.5kg (70lbs)
@@ -67,11 +65,13 @@ Three criterias are always applicable:
 {: .note-title }
 > Girth / Girth + length
 >
-> The girth is the maximum permitted parcel size. It is calculated as: girth = 2 x (height + width). Most companies use girth + length =  2 x (height + width) + length to determine the maximum parcel size.
-> ([DHL Dictionary](https://dhl-freight-connections.com/en/logistics-dictionary/girth-measurement/), [DPD FAQ](https://www.dpd.com/de/en/faq/was-beutet-gurtmas/))
+> The girth is the maximum permitted parcel size. It is calculated as: girth = 2 x (height + width). Most companies use girth + length =  2 x (height + width) + length to determine the maximum parcel size
+> ([DHL Dictionary](https://dhl-freight-connections.com/en/logistics-dictionary/girth-measurement/), [DPD FAQ](https://www.dpd.com/de/en/faq/was-beutet-gurtmas/)).
 
-To ensure that the delivery can be carried out particularly quickly (especially without material handling equipment such as forklifts), packages must not exceed a maximum permissible weight. This varies from provider to provider, but is centered around around 31.5 kg.Girth + length ensures that apart from weight a certain "density" maintained. Space is expensive and girth + length ensures a lower bar on what might be a cheap parcel in terms of wight but taking up overproportionally large space in the transportation vehicles. The product portfolio that is subject to optimization is dense enough such that we omit the girth+length constraint.
-Dangerous goods are less an economic category than a legal one, defined by the Agreement of September 30, 1957 concerning the International Carriage of Dangerous Goods by Road, ADR, from 1957 ensuring safe transportation.
+To ensure that the delivery can be carried out particularly quickly (especially without material handling equipment such as forklifts), packages must not exceed a maximum permissible weight. This varies from provider to provider, but is centered around around 31.5 kg.
+*Girth + length* ensures that apart from weight a certain "density" maintained. Space is expensive and *girth + length* ensures a lower bar on what might be a cheap parcel in terms of wight but taking up overproportionally large space in the transportation vehicles.
+The product portfolio that is subject to optimization is dense enough such that we omit the *girth + length* constraint.
+Dangerous goods are less an economic category than a legal one, defined by the agreement of September 30, 1957 concerning the *International Carriage of Dangerous Goods by Road* (ADR) from 1957 ensuring safe transportation.
 This agreement categorizes goods for road transport, defines warning and safety instructions and lists exceptions. Exceptions include:
 - simplified transport of certain dangerous goods when carried in small quantities as part of a company’s ancillary activities (e.g., maintenance, repair, construction) according to  Special Provision SV1 (ADR 3.3)
 - limited quantities (LQ) allows exemptions from most ADR provisions when dangerous goods are packaged in very small quantities per inner and outer packaging (ADR 3.2)
@@ -101,46 +101,46 @@ While some companies offer a full-service other companies only provide one or so
 > ([Red Stag Fulfillment](https://redstagfulfillment.com/3pl-definition-process-resources/))
 
 
-## The Oater product portfolio and consumable goods
-The Oater sells an automated oat drink production machine called The Oater Barista for fresh on-site production of oat drink.
-This machine consists of a reactor, water inlet and outlet, a stirrer, and a heating jacket for the reactor as well as various in- and outlets.
-During production, a dry mix consisting of oat flour and enzymes is suspended in an aqueous solution on site for simultaneous starch degradation and saccharification.
-After saccharification, oil is dispersed into the solution.
-Once the ready-to-consume product has been dispensed, The Oater Barista doses a cleaning detergent into the reactor and starts a cleaning cycle.
-The Oater Barista's batch production is patented. Interested? [Read on here](https://auerbenji.github.io/docs/blog/the-oater-is-patented/).
+# Case study: minimizing The Oater's cost to serve
+## The Oater product portfolio
+The Oater produces The Oater Barista, an automated oat drink production machine.
+The machine mixes water, an oat-based dry mix, as well as canola oil yielding oat drink through fermentation.
+After production, The Oater Barista doses a cleaning detergent into the reactor.
+The Oater Barista's batch production is patented.
+Interested? [Read on here](https://auerbenji.github.io/docs/blog/the-oater-is-patented/).
 
 Dry mix, oil and cleaning detergent are sent to the customer on a monthly basis.
-The quantities depend on the customer's consumption volume which they can adjust in an online shop as the subscription size $$a$$ between 80 liters and 500 liters of oat drink per month.
-Dry mix, oil, and cleaning detergent are only available as a single container size.
-The cleaning detergent is classified as dangerous good according to ADR 3.2 under the UN-number 1719 and thus transportation by CEP is only permitted in containers not exceeding one liter.
+The quantities depend on the subscription volume ($$a$$) chosen by the customer.
+Dry mix, oil, and cleaning detergent are only available in a single container size.
+The cleaning detergent's container size is limited by ADR section 3.2.
 
-# Methodology
-The The Oater Barista machine uses exactly 1 dry mix pouch, 1/5 of an oil bottle and 1/9 of a cleaning agent bottle to produce 4.5 liters of oat drink in a single production cycle.
+The The Oater Barista machine uses exactly one dry mix pouch, $$\frac{1}{5}$$ of an oil bottle and $$\frac{1}{9}$$ of a cleaning detergent bottle to produce 4.5 liters of oat drink in a single production cycle.
 Consequently
 - one pouch of dry mix is sufficient to produce 4.5 liters of oat drink
 - one bottle of oil is sufficient to produce 22.5 liters of oat drink
 - one bottle of cleaning detergent is sufficient to produce 40.5 liters of oat drink.
 
-Notice not only the consumable goods' weight must be taken into account but the gross weight including paper pouch and bottle weight.
-While the weight difference might be neglectable for paper pouch and detergent plastic bottle, the oil is shipped in a glas bottle making up around half of the gross oil's  weight.
-Furthermore, only complete quantities may be shipped.
-This causes ceiling for each subscription size and consumable.
-This effects mostly small subscription sizes.
+Note that not only the net weight of the consumable goods must be considered, but also the gross weight, which includes the paper pouch and (glass/plastic) bottle.
+In addition, shipments can only be made in complete quantities.
 
-Given a known customer's subscription size and a known shipping-cost-to-weight vector and known dangerous goods penalty, as well known costs for warehousing service we want to find the packing rule that yields minimal logistics costs.
+# Methodology
+Given a known customer's subscription size ($$a$$) and a known shipping-cost-to-weight vector ($$V$$) and known dangerous goods penalty ($$\Phi$$), as well known costs for warehousing and carrier we want to find the packing rule that yields minimal cost to serve the customer.
 We assume that girth size is never a limiting factor due to the high density of the individual products.
+Instead of minimizing only transportation cost we will look at the cost to serve.
+We will refer to this as the *shipping-cost-problem*.
 
-As a starting point we place all cleaning agent bottles in a single parcel so that the penalty is only paid once.
-However, the different weight of the species in $$N$$ means that it may no longer be possible to make optimal use of the shipping weight, as the weight class of the cleaning detergent is no longer available or other parcels.
+As a heuristic we place all bottles of cleaning detergent in a single parcel so that the penalty is only paid once.
+However, the different weight categories of dry mix, oil and cleaning detergent indicate that it may no longer be possible to make optimal use of the shipping weight, as the weight class of the cleaning detergent is no longer available or other parcels.
 Furthermore, the degressive cost structure of shipping costs might make it more attractive to pack two medium-weight packages than one very heavy and one light package.
-It renders obvious that there is no simple heuristic packing instruction that guarantees minimal shipping costs.
-We will therefore proceed to mathematical optimization to minimize shipping cost.
+It renders obvious that there is no simple instruction that guarantees minimal cost.
+We will therefore proceed to *mathematical optimization*.
 
-**Mathematical optimization**, also known as mathematical programming is the art of selecting of the best solution, given a set of conditions that have to hold true (equality constraints) as well as a set of conditions that may vary in a given range (inequality constraints).
-The nature of the variables involved in the cost function and in the constraints define the problem category and thus the solution approach.
-Mathematical programming is used everywhere, from routing problems, AI training and shipping cost optimization to advanced process control and has equal origins in the chemical engineering community as well as in operations research.
-Mathematical optimization has matured to provide solution strategies to deal with bi-level problems (optimization problems that are subject to another optimization problem), uncertainty (both stochastic and worst case) as well as many more "special" cases.
-It takes more than a lifetime to learn all about it.
+{: .note-title }
+> Mathematical optimization
+>
+> Mathematical optimization, also known as mathematical programming is the art of selecting of the best solution, given a set of conditions that have to be fullfilled exactely (equality constraints) as well as a set of conditions that have to be fullfilled but may vary in a given range (inequality constraints). The equation that defines how a good solution is measured is called *cost function*.
+The nature of the variables involved in the cost function and in the constraints then define the problem category and thus lastly solution approach.
+Mathematical programming is used everywhere, from routing problems, AI training to advanced process control and has equal origins in the chemical engineering community as well as in operations research.
 The interested reader is directed to my former Professor Stratos Pistikopoulos who taught me optimization (see [Parametric](https://parametric.tamu.edu/)) as well as his dear collegues in the field such as Professor Alexander Mitsos (see [SVT](https://www.avt.rwth-aachen.de/cms/AVT/Forschung/Systemverfahrenstechnik/~ipqz/Prozessregelung/lidx/1/)).
 Furthermore I suggest reading articles in [CACE](https://www.sciencedirect.com/journal/computers-and-chemical-engineering), and [EJOR](https://www.sciencedirect.com/journal/european-journal-of-operational-research), both great journals to follow and inspire how today's engineering problems are solved via optimization.
 
@@ -159,7 +159,7 @@ Each item has a known weight $$w = [w_T, w_O, w_R]^\top$$ in kilo gram, and a kn
 Carrier cost can be obtained by the multiplication of a cost-per-weight vector with a distribution matrix holding the content of each parcel.
 
 ### Shipping cost vector
-The shipping cost vector $$V$$ holds the price-per-parcel within the associated shipping weight class.
+The shipping cost vector $$V$$ holds the price-per-parcel ($$SC$$) within the associated shipping weight class ($$SW$$).
 We remove 1.5 kg from each parcel to account for carton and filling weight.
 
 $$
@@ -242,34 +242,49 @@ D_{N_S,p} &\leq N_R \cdot \Phi_p \quad \forall p \in P \tag{g}
 $$
 
 Equation (b) guarantees that all items are shipped to the customer and equation (c) ensures only one weight category may be selected.
-Equation (d) serves a double purpose: first it provides a null-cost category, representing an empty and thus unshipped parcel. Additionally, in case the parcel is not empty, the maximum admmidable parcel weight is set as an upper bound.
+Equation (d) serves a double purpose: first it provides a null-cost category, representing an empty and thus unshipped parcel. Additionally, in case the parcel is not empty, the maximum admissible parcel weight is set as an upper bound.
 Equation (e,f) finally select the correct cost category.
-Notice that equation (e)'s the RHS of equation (e) is the LHS of equation (f).
-The statement is split and then handed to the optimizer.
-Lastly equation (g) sets the penalty pin in case cleaning detergent is shipped.
-Notice that the cost function then sums over all penalty pins.
+Notice that the RHS of equation (e) is the LHS of equation (f).
+What could be written as a single line in math notation has to be split apart first and then handed to the optimizer.
+Lastly equation (g) sets the penalty pin in case cleaning detergent is in the parcel.
+Notice that the cost function then conveniently sums over all elements in $$\Phi$$.
 
 ### Solution strategy
 The shipping cost problem holds linear terms as well as integer decision variables only.
 While $$D$$ holds an integer decision variables; $$C, \Phi$$ hold binary decision variables.
 Thus, the shipping cost problem is an integer programming problem and can be solved with standard IP solvers.
-The problem was solved with Gurobi Optimizer version 10.0.3 on an Apple M3 Pro SoC running 12 threads with 18GB RAM in Visual Studio version 1.101.2. The model consists of 1140 integer decision variables of which 855 are binaries for a subscription size of 320 liters.
-Although the model holds $$\approx 10^3 $$ binaries, $$M \leq 1e-5$$ in $$y \leq Mb$$, thus we omit setting Gurobis IntegralityFocus parameter saving runtime.
-The model solved to optimality in 0.04 seconds for generation and 0.17 seconds for optimization.
-This is remarkably fast: notice shipping cost optimization extends bin packing, itself an extension of the NP-hard knapsack problem.
-The subscription size of 1000 liters per month size was solved to optimality in 0.10 seconds for generation and 0.83 seconds for optimization.
-Consequently we will not investigate runtime improvement through problem reformulation noting that Gurobi does an excellent job at presolving and facilitating the problem before optimization.
+The problem was solved with Gurobi Optimizer version 10.0.3 on an Apple M3 Pro SoC running 12 threads with 18GB RAM in Visual Studio version 1.101.2. The model consists of 1140 integer decision variables of which 855 are binaries for a subscription size of 320 liters and solved to optimality in 0.04 seconds for generation and 0.17 seconds for optimization.
+Since $$SW \ll 1e+5$$ in $$D \cdot w \leq SW \cdot C $$ in equation (f), we omitted setting Gurobis' *IntegralityFocus* parameter.
 
 {: .note-title }
-> Information
+> Integrality focus
 >
-> I will add a follow-up investigating runtime, solving the shipping cost problem in Julia using JuMP, ORTools CP-SAT and HiGHS. Come back later. Not that my publication on [flexibility](https://auerbenji.github.io/docs/publications/algorithmic-advances-in-flexibility-analysis/) already investigated the reformulation of big-M constraints, using SOS1 constraints instead.
+> Since $$C$$ is binary, Gurobi assumes values for binaries that are as large as $$10^{-5}$$ as $$0$$. In case $$SW \gg 10^5$$, this would not effectively enforce the intended relationship that $$D$$ must be zero if $$C$$ is zero. To circumvent the effect known as *trickle flow* Gurobi has the option to set the *IntegralityFocus* parameter. This makes Gurobi work really hard to make sure zeros are actual zeros by assuming only variables as large as $$10^{-9}$$ as $$0$$
+> (see [IntegralityFocus](https://docs.gurobi.com/projects/optimizer/en/current/reference/parameters.html#parameterintegralityfocus)).
+
+For $$a=1000$$, the model was solved to optimality in 0.10 seconds for generation and 0.83 seconds for optimization.
+This is remarkably fast for a model holding $$ |C| \approx 10^3 $$ binaries.
+Consequently we will not investigate runtime improvement through problem reformulation.
+Gurobi does an excellent job at presolving and facilitating the problem before optimization.
+
+{: .note-title }
+> More on runtime will come soon
+>
+> I will add a follow-up investiagation on solver and modeling language specific runtime, solving the shipping cost problem in Julia using JuMP, ORTools' CP-SAT and HiGHS. Come back later. Note that my publication on [flexibility](https://auerbenji.github.io/docs/publications/algorithmic-advances-in-flexibility-analysis/) already investigated the effects of omitting big-M constraints using SOS1 constraints instead on model generation and model optimization time.
+
+Notice shipping cost optimization extends bin packing, itself an extension of the NP-hard knapsack problem.
+The classical knapsack problem (see [Knapsack 1](https://doi.org/10.1112/plms/s1-28.1.486), [Knapsack 2](http://dx.doi.org/10.1007/978-3-540-24777-7)) asks how to select a subset of items, each with a value and a weight, such that the total weight does not exceed a given capacity while maximizing the total value. This problem is already NP-hard, as the feasible solution space grows combinatorially with the number of items. A natural extension is the bin packing problem (see [Wikipedia](https://en.wikipedia.org/wiki/Bin_packing_problem)), which shifts the focus from maximizing value to minimizing the number of bins required to hold all items, given fixed bin capacities.
+Its defining feature is the binary big-M style decision whether an item is placed in a particular bin.
+The shipping cost problem follows the same logic (see shipping cost problem's equations d, e, f).
+Like bin packing, it uses binary allocation constraints, but it extends the model by introducing discrete cost classes for bins.
+Instead of minimizing only the number of bins, the objective is to minimize cost to serve by choosing not just how many bins are used but also which type of bins are selected.
+Thus, while inheriting the NP-hard complexity of knapsack and bin packing, the added dimension of discrete bin costs renders my problem even more challenging.
 
 
 # Results and discussion
 
-[Figure 2](#fig-cost-by-cat) shows the cost by categoy their share of the total cost to serve.
-The horizontal axis of the figure represents the monthly subscription size
+[Figure 2](#fig-cost-by-cat) shows the cost by categoy and their share of the total cost to serve.
+The horizontal axis of the figure represents the monthly subscription size.
 The cost to serve $$CTS$$, warehouse cost $$CW$$ and carrier cost $$CC$$ are represented by solid lines and represented on the left y-axis.
 The proportions of the cost of goods $$\frac{CG}{CTS}$$, warehouse cost $$\frac{CW}{CTS}$$ and carrier cost $$\frac{CC}{CTS}$$ are represented by dashed lines and represented on the right y-axis.
 
@@ -279,12 +294,11 @@ The proportions of the cost of goods $$\frac{CG}{CTS}$$, warehouse cost $$\frac{
 </figure>
 
 The cost to serve approach a steady state starting from monthly subscription sizes of around 500 liters and more.
-The per-liter cost of goods are almost identical, ignoring the ceiling effect.
+The per-liter cost of goods are almost invariant with only minor effects through ceiling.
 Thus when a steady-state $$CTS$$ is reached, this can only be achieved through a steady state in warehouse and carrier costs.
 The overall $$CTS$$ savings are $$18.3\%$$ when comparing the most unfortunate subscription size of 100 liters per month with the best possible subsciption size of 920 liters per month.
 
-To further investigate this issue [figure 3](#fig-cost-by-cat) shows the relative savings for warehouse ($$\eta_W$$) and carrier ($$\eta_C$$).
-We use 80 liters as a base case as this reflects the smallest currently available subscription size at The Oater.
+To further investigate this issue [figure 3](#fig-cost-by-cat) shows the relative savings for warehouse cost ($$\eta_W$$) and carrier cost ($$\eta_C$$) compared against the $$a=80$$ base case as this reflects the smallest available subscription size at The Oater.
 The findings from [figure 2](#fig-cost-by-cat) are verified.
 Also the relative savings both for warehouse and carrier cost approach a near steady-state/saturation effect starting from around 500 liters per month.
 
@@ -298,7 +312,7 @@ We save even more on warehouse expenses with savings of up to 74.4%.
 However, since the carrier cost are higher in absolut terms, carrier savings are more valuable to minimize cost to serve.
 
 Lastly, let's investigate the effect of shipping cost optimization from a different angle.
-[Figure 4](#fig-parcel-value) shows the levelized per-parcel value ($$LPV$$) and the number of parcels that serve the subscription model.
+[Figure 4](#fig-parcel-value) shows the levelized per-parcel value ($$LPV = \dfrac{CTS \cdot a}{|\text{parcels}|} $$).
 As parcels are filled, $$LPV$$ increases in a predictable manner. Once an additional box must be introduced, $$LPV$$ drops sharply, which in turn reduces the overall cost efficiency of the carrier.
 This apparent loss can be mitigated by reverting to a smaller parcel category, defined by lower weight and cost, which dampens the decline in savings.
 The observed reductions in $$LPV$$ align precisely with corresponding declines in $$\eta_W$$ and $$\eta_C$$ (see [figure 3](#fig-cost-by-cat)), although the latter effect is less pronounced.
@@ -308,22 +322,19 @@ The observed reductions in $$LPV$$ align precisely with corresponding declines i
   <figcaption><strong>Figure 4:</strong> Shipping cost optimization: levelized parcel value.</figcaption>
 </figure>
 
-## Conclusion
-A harsh negative effect of the dangerous goods surcharge is not apparent.
+# Conclusion
+A strongly negative effect of the dangerous goods surcharge is not apparent.
 Looking at $$\Phi$$, we observe that dangerous goods are only divided into two packages for subscription sizes of 940 liters or more.
 This only happens because dangerous goods required to serve subscription sizes of 940 liters and more exceed the weight limit for a single parcel.
 Bundling all cleaning detergent bottles into a single parcel indicates that the weight of a cleaning detergent bottle does not offer sufficient flexibility to achieve savings per weight through the clever filling of a package, despite the dangerous goods surcharge.
-This may be due to the fact that a cleaning detergent bottle weighs about twice as much as dry mix, whose quantity surpasses the cleaning detergent's quantify ($$N_T \approx 10 \cdot N_R$$, $$ w_T \approx 0.5 \cdot w_R$$).
-Before the cleaning detergent is used to fill up free weight, two dry mixes are utilized.
+This may be due to the fact that a cleaning detergent bottle weighs about twice as much as dry mix, whose quantity surpasses the cleaning detergent's quantity ($$N_T \approx 10 \cdot N_R$$, $$ w_T \approx 0.5 \cdot w_R$$).
+Instead of utilizing a bottle of cleaning detergent to fill up free weight, two dry mixes are utilized instead.
 
-In summary: optimal packing of the parcels reduces the cost to serve by up to 20% with savings in carrier costs of up to 55%.
-No particular pressure on efficiency due to the dangerous goods penalty is be confirmed.
-Note that the optimal solution is indeed identical to the simple heuristic “all cleaners in a single package.”
-Efficiency losses arise almost exclusively from adding another parcel to serve the subscription, which reduces the parcel value.
-These efficiency losses are then damped through downsizing to smaller parcel sizes, yet are still passed on to the carrier costs.
-Finally, the losses in savings effect the total costs even more dampened due to the low share of carrier costs in the cost to serve.
-Nevertheless, The Oater achieves significant savings through optimized shipping.
-Note that the savings of 20% directly increase the margin.
-Note further that on-premise oat-drink is mostly a low-margin FMCG where every decrease in $$CTS$$ with higher overall volume proves more effective than an increase in price per liter for the customer.
-
-# References
+**In summary**: optimal bin packing reduces the cost to serve by up to 20% with savings in carrier costs of up to 55%.
+No particular pressure of the dangerous goods penalty on the bin packing was observed.
+The optimal solution coincides with the simple heuristic of placing all cleaning detergent bottles into a single package. Efficiency losses arise primarily when an additional parcel must be added to fulfill the subscription, thereby reducing the value per parcel.
+These losses are partially mitigated by downsizing to smaller and thus cheaper parcels but still translate into higher carrier costs.
+Despite this, The Oater realizes substantial savings through optimized shipping, directly improving margin.
+Moreover, on-premise oat drink is largely a low-margin FMCG, where decreasing the cost to serve at higher volumes is more effective than increasing the price per liter for the customer.
+The case study showed combined warehouse and carrier costs of about 20-10%, excluding returns and personnel.
+Looking at industry standards, [The Geography of Transport Systems](https://transportgeography.org/contents/chapter7/logistics-freight-distribution/ecommerce-cost-structure/?utm_source=chatgpt.com) suggests that a theoretical minimum of 10% may be achievable, though this is rarely realized in practice. In most cases, combined shares for warehouse and carrier of up to 30% seem realistic, with The Oater operating at the lower end through optimized shipping costs.
