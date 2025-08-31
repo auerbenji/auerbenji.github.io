@@ -12,4 +12,4 @@ Benjamin Auer, Widdersdorfer Str 183/185, 50825 Cologne, Germany
 
 This page expresses my work, view and opinion.
 It is not commercialized, it does not use or collect user-data. It does not track.
-In the case of misconduct, please reach out to me via [mail](mailto:{{auerbenji@oater.de}}).
+In the case of misconduct, please reach out to me via [mail](mailto:{{ site.email }}).
