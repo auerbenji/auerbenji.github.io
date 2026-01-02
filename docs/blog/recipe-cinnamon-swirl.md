@@ -29,22 +29,22 @@ Use type 550 flour. High gluten high protein flour gives the dough the character
 # Total quantities
 For a base flour mass of $$m = 1000\,\text{g}$$, the following total ingredient quantities apply:
 - water: $$ x_w = 0.50 $$
-- salt: $$ x_s = 0.01 $$
+- salt: $$ x_{sa} = 0.01 $$
 - yeast: $$ x_y = 0.03 $$
-- sugar: $$ x_s = 0.57 $$
+- sugar: $$ x_{su} = 0.57 $$
 - butter: $$ x_b = 0.52 $$
 - cinnamon: $$ x_{ci} = 0.02 $$
 - cardamom: $$ x_{ca} = 0.005 $$
 - eggs: 3 pieces
 
 # Preparation
-Add $$ m $$ in a bow.  
-Add $$ x_s m $$ salt.  
+Add $$ m $$ in a bowl.
+Add $$ x_{sa} m $$ salt.  
 Mix. Form a flour well.
 
 ## Starting the yeast
 Pour $$ 0.4 \cdot x_w m $$ water in a cup (20 C warm).  
-Add $$ 0.01 \cdot x_s m $$ sugar.  
+Add $$ 0.01 \cdot x_{su} m $$ sugar.  
 Add $$ x_y m $$ yeast.  
 Mix until yeast and sugar is dissolved.  
 Pour into a flour well, cover, and let rise for **20 minutes**.
@@ -52,15 +52,15 @@ Pour into a flour well, cover, and let rise for **20 minutes**.
 ## Cinnamon-butter filling
 While the yeast activates, prepare the filling.  
 Add $$ 0.75 \cdot x_bm $$ butter in a bowl.  
-Add $$ 0.70 \cdot x_sm $$ sugar.  
-Add $$ x_{ci}m $$ cinnamon.  
-Add $$ x_{ca}m $$ cardamom.  
+Add $$ 0.70 \cdot x_{su} m $$ sugar.  
+Add $$ x_{ci} m $$ cinnamon.  
+Add $$ x_{ca} m $$ cardamom.  
 Blend with a mixer.
 
 # Main dough
 Take the main bowl (pre-dough in flour well) and
 Add $$ 0.25 \cdot x_b m $$ butter.  
-add $$ 0.29 \cdot x_s m $$ sugar.  
+add $$ 0.29 \cdot x_{su} m $$ sugar.  
 Add $$ 0.60 \cdot x_w m $$ water.  
 Add 3 eggs.  
 **Knead for 10 minutes**.

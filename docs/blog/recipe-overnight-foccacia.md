@@ -37,16 +37,16 @@ The recipe is based on $$m = 1000\,\text{g}$$ of foccacia/pizza flour (type 405 
 
 # Preparation
 
-## Mixing (evening)
-
 {: .warning }
 Yeast and salt do not get along well. Never add both at the same time or mix together. Add flour and yeast, mix, then add salt. Or add flour and salt, mix, then add yeast. We leave out the salt for the first rise.
 
-1. Add $$ 0.5 m $$ to a large bowl.  
-2. Add $$ m_w $$.  
-3. Add $$ m_y $$ (its easier to dissolve the yeast in a part of the water, then add water-yeast-mix to bowl).  
-4. Mix with a fork or handle of a large spoon until it resembles a watery meal of goodness.
-5. Cover and **let rest for 1 hour**.
+## Mixing (evening)
+
+Add $$ 0.5 m $$ to a large bowl.  
+Add $$ m_w $$.  
+Add $$ m_y $$ (its easier to dissolve the yeast in a part of the water, then add water-yeast-mix to bowl).  
+Mix with a fork or handle of a large spoon until it resembles a watery meal of goodness.
+Cover and **let rest for 1 hour**.
 
 ## First rise (overnight)
 Rest for **10-16 hours** in fridge (approx. 7 °C).  
