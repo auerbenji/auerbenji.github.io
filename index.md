@@ -9,87 +9,35 @@ permalink: /
 # Welcome, stranger!
 {: .no_toc }
 
-I am Benjamin. This is the place where I write about stuff that is in my life.
+On this blog, I write about my life.
 {: .fs-6 .fw-300 }
 
-{: .warning }
-> This page holds my individual views only.
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
 ---
 
-[Get started now](#getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[View it on GitHub][Just the Docs repo]{: .btn .fs-5 .mb-4 .mb-md-0 }
+[Add me on LinkedIn]{: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[View my GitHub]{: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
-
-```yaml
-# Clearing the jekyll cache when running locally
-bundle exec jekyll clean
-```
-
-```yaml
-# Running the page on auto-update
-bundle exec jekyll serve --livereload
-```
-
-```yaml
-# Pushing an empty commit to github
-git commit --allow-empty -m "trigger rebuild"
-git push origin main
-```
-
-{: .note }
-The equation $$E = mc^2$$ is displayed inline, because its not separated by a spaceline.
-
-{: .note }
-The following equation is separeted by a spaceline, so its shown large and centered/middle orientated
-
-$$
-\int_{a}^{b} f(x)\, dx = F(b) - F(a)
-$$
-
 
 ## What to expect
 
-The [Just the Docs Template] provides the simplest, quickest, and easiest way to create a new website that uses the Just the Docs theme. To get started with creating a site, just click "[use the template]"!
+This site  is a personal Jekyll-based documentation site. It serves as a repository of my writings, technical projects, publications, blog posts, and miscellaneous utilities.
+The **[About me]** section introduces me and outlines my background and interests.
+The **[Projects]** section holds optimization work and code related to real-world problems.
+**[Publications]** lists academic work.
+The **[Blog]** section contains personal posts including essays and recipes.
 
 {: .note }
-To use the theme, you do ***not*** need to clone or fork the [Just the Docs repo]! You should do that only if you intend to browse the theme docs locally, contribute to the development of the theme, or develop a new theme based on Just the Docs.
-
-You can easily set the site created by the template to be published on [GitHub Pages] – the [template README] file explains how to do that, along with other details.
-
-If [Jekyll] is installed on your computer, you can also build and preview the created site *locally*. This lets you test changes before committing them, and avoids waiting for GitHub Pages.[^2] And you will be able to deploy your local build to a different platform than GitHub Pages.
-
-More specifically, the created site:
-
-- uses a gem-based approach, i.e. uses a `Gemfile` and loads the `just-the-docs` gem
-- uses the [GitHub Pages / Actions workflow] to build and publish the site on GitHub Pages
-
-Other than that, you're free to customize sites that you create with the template, however you like. You can easily change the versions of `just-the-docs` and Jekyll it uses, as well as adding further plugins.
-
-{: .note }
-See the theme [README][Just the Docs README] for how to use the theme as a gem without creating a new site.
+> The work and views presented on this page reflect my individual position and are provided in a personal capacity. They are independent of, and not affiliated with any roles, mandates, or functions that I currently hold or may pursue in the future, whether referenced in the [diagramm] or elsewhere. The affiliations shown in the [diagramm] are for orientation purposes only.
 
 ## What not to expect
 
-Just the Docs is &copy; 2017-{{ "now" | date: "%Y" }} by [Patrick Marsceill](https://patrickmarsceill.com).
+This blog is not a platform for political views, activism, or ideological positioning. It does not express consent, dissent, or commentary regarding my current or past professional roles, projects, or affiliations. It also does not aim for narrative storytelling or aesthetic presentation; it follows the maxim that content dominates style, favoring analytical structure over prose, with few to no images. Feel free to reach out to me, whenever you come to believe I avoid my own principles.
 
 ### License
 
+Just the Docs is &copy; 2017-{{ "now" | date: "%Y" }} by [Patrick Marsceill](https://patrickmarsceill.com).
 Just the Docs is distributed by an [MIT license](https://github.com/just-the-docs/just-the-docs/tree/main/LICENSE.txt).
-
-### Contributing
-
-When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change. Read more about becoming a contributor in [our GitHub repo](https://github.com/just-the-docs/just-the-docs#contributing).
-
-#### Thank you to the contributors of Just the Docs!
 
 <ul class="list-style-none">
 {% for contributor in site.github.contributors %}
@@ -99,30 +47,16 @@ email, or any other method with the owners of this repository before making a ch
 {% endfor %}
 </ul>
 
-### Code of Conduct
-
-Just the Docs is committed to fostering a welcoming community.
-
-[View our Code of Conduct](https://github.com/just-the-docs/just-the-docs/tree/main/CODE_OF_CONDUCT.md) on our GitHub repository.
-
-----
-
 [^1]: The [source file for this page] uses all three markup languages.
 
 [^2]: [It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
 
-[Jekyll]: https://jekyllrb.com
-[Markdown]: https://daringfireball.net/projects/markdown/
-[Liquid]: https://github.com/Shopify/liquid/wiki
-[Front matter]: https://jekyllrb.com/docs/front-matter/
-[Jekyll configuration]: https://jekyllrb.com/docs/configuration/
-[source file for this page]: https://github.com/just-the-docs/just-the-docs/blob/main/index.md
-[Just the Docs Template]: https://just-the-docs.github.io/just-the-docs-template/
-[Just the Docs]: https://just-the-docs.com
-[Just the Docs repo]: https://github.com/just-the-docs/just-the-docs
-[Just the Docs README]: https://github.com/just-the-docs/just-the-docs/blob/main/README.md
-[GitHub Pages]: https://pages.github.com/
-[Template README]: https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md
-[GitHub Pages / Actions workflow]: https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/
-[customize]: {% link docs/customization.md %}
-[use the template]: https://github.com/just-the-docs/just-the-docs-template/generate
+
+[diagramm]: {% link docs/about.md %}#affiliations
+[About me]: {% link docs/about.md %}
+[Projects]: {% link docs/projects/index.md %}
+[Blog]: {% link docs/blog/index.md %}
+[Publications]: {% link docs/publications/index.md %}
+
+[Add me on LinkedIn]: https://www.linkedin.com/in/auerbenjamin/
+[View my GitHub]: https://github.com/auerbenji

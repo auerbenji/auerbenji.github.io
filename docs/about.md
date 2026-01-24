@@ -6,46 +6,44 @@ nav_order: 1
 # About me
 {: .no_toc }
 
-Hello there! I am Benjamin. If you want to get to know me, please read along.
-{: .fs-6 .fw-300 }
-
 ## Table of contents
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
----
-
-Interested in discussion? Contact me via [mail](mailto:{{ site.email }}).
-
 ## Who is that guy?
 
-Hello there! I’m Benjamin Auer and I am founder and COO of [The Oater](https://www.oater.de). My work there is centerd around just-in-timne supply chains for perishable and dangerous goods. I also do sales and coordinate the research projects that The Oater is involved in.
-At The Oater we make it fresh by transferring the point of production to the place of consumption by building micro-factories.
-I have a strong background in process systems engineering (PSE). PSE is concerned with the optimal operation of chemical systems, applying mathematical modeling and optimization techniques.
-My training started at RWTH Aachen, where I worked for Alexander Mitsos. At the end of my studies I had the great honor to work at the Pistikopoulos Lab at Texas A&M Unviversity.
-When I do not work, I am traveling the world. Or I am diving. Or making pastry.
-
+Hello there! I am Benjamin Auer, founder and currenlty COO of [The Oater](https://www.oater.de).
+My work at The Oater is centerd around just-in-time supply chains for perishable and dangerous goods.
+I also do sales and coordinate the research and IP generation projects that The Oater is involved in.
+At The Oater we make it fresh by moving the place of production to the place of consumption through just-in-time production in our table-top micro-factories.
+We use true chemical plant design and apply downsizing, strong food safety measures making sure that our micro-factories may even be operated by untrained personal.
+To tackle this challenge, I have to make use of my background in process systems engineering (PSE).
+PSE is concerned with the optimal operation of chemical systems, applying mathematical modeling and optimization techniques.
+My training started at RWTH Aachen, where I worked for Professor Alexander Mitsos.
+Towards the end of my studies I had the great honor to work at [Pistikopoulos Lab](https://parametric.tamu.edu/) at Texas A&M Unviversity for Professor Stratos Pistikopoulos.
+When not working, I am traveling the world. Or, I am diving or making pastry.
 
 ## Acknowledgments
 Dustin Kenefake inspired me to build this page. Dustin works as a postdoctoral researcher at the University of Delaware.
-Make sure to have a look at his amazing projects [here](https://dkenefake.github.io/).
-I am deeply grateful to Marcello Di Martino, who not only encouraged me to pursue my first scientific publication but also sparked my passion for sharing my knowledge. For several of the articles presented here, he generously served as reviewer, mentor and critical voice. Find some of Marcello's projects [here](https://scholar.google.com/citations?user=ummEBeUAAAAJ&hl=en). More than anything, I am grateful to be able to call Dustin and Marcello my close friends.
+Make sure to have a look at his amazing [projects](https://dkenefake.github.io/).
+I am deeply grateful to Marcello Di Martino, who not only encouraged me to pursue my first scientific publication but also sparked my passion for sharing my knowledge. For several of the articles presented here, he generously served as reviewer, mentor and critical voice.
+Find some of Marcello's projects [here](https://scholar.google.com/citations?user=ummEBeUAAAAJ&hl=en). More than anything, I am grateful to call Dustin and Marcello great friends.
 
 
-## What I work on
+## Affiliations
 {: .d-inline-block }
-08-30-2025
+01-19-2026
 {: .label .label-green }
 
 ```mermaid
-graph TD;
-    accTitle: the diamond pattern
-    accDescr: a graph with four nodes: A points to B and C, while B and C both point to D
-	
-    Benji-->A(COO, The Oater);
-    Benji-->B(ext. Researcher, Pistikopoulos Lab);
-    Benji-->C(Divemaster, in progress);
-	Benji-->D(Kitchening, discontinued);
+graph TD;	
+    Benjamin-->A(OIY Solutions GmbH, The Oater);
+    A-->E(General management);
+    A-->F(Head of Operations);
+    A-->G(Head of Sales);
+    Benjamin-->B(ext. Researcher, Pistikopoulos Lab);
+    Benjamin-->C(Divemaster, in progress);
+	Benjamin-->D(Kitchening GbR, discontinued);
 ```

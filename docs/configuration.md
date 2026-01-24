@@ -1,9 +1,9 @@
 ---
 title: Configuration
-nav_order: 2
+nav_order: 5
 ---
 
-# About me
+# Configuration
 {: .no_toc }
 
 This page is about to be deleted, once all dependencies are cleared.
@@ -17,7 +17,39 @@ This page is about to be deleted, once all dependencies are cleared.
 
 ---
 
-I was born at a very young age.
+## Start local host
+
+[Get started now](#getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[View it on GitHub][Just the Docs repo]{: .btn .fs-5 .mb-4 .mb-md-0 }
+
+---
+
+```yaml
+# Clearing the jekyll cache when running locally
+bundle exec jekyll clean
+```
+
+```yaml
+# Running the page on auto-update
+bundle exec jekyll serve --livereload
+```
+
+```yaml
+# Pushing an empty commit to github
+git commit --allow-empty -m "trigger rebuild"
+git push origin main
+```
+
+{: .note }
+The equation $$E = mc^2$$ is displayed inline, because its not separated by a spaceline.
+
+{: .note }
+The following equation is separeted by a spaceline, so its shown large and centered/middle orientated
+
+$$
+\int_{a}^{b} f(x)\, dx = F(b) - F(a)
+$$
+
 
 ## 2025-2020
 
