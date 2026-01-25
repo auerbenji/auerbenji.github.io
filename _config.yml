@@ -111,8 +111,10 @@ heading_anchors: true
 
 # Aux links for the upper right navigation
 aux_links:
-  "Add me on LinkedIn":
-    - "https://www.linkedin.com/in/auerbenjamin/"
+  Add me on LinkedIn:
+    - https://www.linkedin.com/in/auerbenjamin/
+  View my Github:
+    - https://github.com/auerbenji 
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: false
@@ -151,8 +153,8 @@ last_edit_timestamp: true # show or hide edit time - page must have `last_modifi
 last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
 
 # Footer
-gh_edit_link: true # show or hide edit this page link
-gh_edit_link_text: "Auerbenji on GitHub"
+gh_edit_link: false # show or hide edit this page link
+gh_edit_link_text: "Auerbenjij on GitHub"
 gh_edit_repository: "https://github.com/auerbenji/auerbenji.github.io" # the github URL for your repo
 gh_edit_branch: "main" # the branch that your docs is served from
 gh_edit_source: "" #docs # the source that your files originate from

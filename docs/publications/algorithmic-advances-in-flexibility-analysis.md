@@ -1,7 +1,7 @@
 ---
 title: Algorithmic advances in flexibility analysis for large-scale location allocation problems
 parent: Publications
-nav_order: 1
+nav_order: 96
 ---
 
 ---

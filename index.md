@@ -26,18 +26,14 @@ The **[About me]** section introduces me and outlines my background and interest
 The **[Projects]** section holds optimization work and code related to real-world problems.
 **[Publications]** lists academic work.
 The **[Blog]** section contains personal posts including essays and recipes.
+Lastly, the **[Recipes]** section contains recipes that I cook rephrased for easier following.
 
 {: .note }
 > The work and views presented on this page reflect my individual position and are provided in a personal capacity. They are independent of, and not affiliated with any roles, mandates, or functions that I currently hold or may pursue in the future, whether referenced in the [diagramm] or elsewhere. The affiliations shown in the [diagramm] are for orientation purposes only.
 
 ## What not to expect
 
-This blog is not a platform for political views, activism, or ideological positioning. It does not express consent, dissent, or commentary regarding my current or past professional roles, projects, or affiliations. It also does not aim for narrative storytelling or aesthetic presentation; it follows the maxim that content dominates style, favoring analytical structure over prose, with few to no images. Feel free to reach out to me, whenever you come to believe I avoid my own principles.
-
-### License
-
-Just the Docs is &copy; 2017-{{ "now" | date: "%Y" }} by [Patrick Marsceill](https://patrickmarsceill.com).
-Just the Docs is distributed by an [MIT license](https://github.com/just-the-docs/just-the-docs/tree/main/LICENSE.txt).
+This blog is not a platform for political views, activism, or ideological positioning. It does not express consent, dissent, or commentary regarding my current or past professional roles, projects, or affiliations. It also does not aim for narrative storytelling or aesthetic presentation; it follows the maxim that content dominates style, favoring analytical structure over prose, with few to no images. Feel free to reach out to me, whenever you come to believe I deviate from my own principles.
 
 <ul class="list-style-none">
 {% for contributor in site.github.contributors %}
@@ -57,6 +53,7 @@ Just the Docs is distributed by an [MIT license](https://github.com/just-the-doc
 [Projects]: {% link docs/projects/index.md %}
 [Blog]: {% link docs/blog/index.md %}
 [Publications]: {% link docs/publications/index.md %}
+[Recipes]: {% link docs/recipes/index.md %}
 
 [Add me on LinkedIn]: https://www.linkedin.com/in/auerbenjamin/
 [View my GitHub]: https://github.com/auerbenji

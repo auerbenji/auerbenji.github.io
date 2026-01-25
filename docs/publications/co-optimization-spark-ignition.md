@@ -1,7 +1,7 @@
 ---
 title: Computational co-optimization of fuel and spark-ignition engines
 parent: Publications
-nav_order: 1
+nav_order: 99
 ---
 
 ---
