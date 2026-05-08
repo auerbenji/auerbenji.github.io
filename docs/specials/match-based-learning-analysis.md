@@ -17,7 +17,7 @@ nav_order: 1
 05-09-2026
 {: .label .label-green }
 
-In this article we analyze the recorded padel level development of three players: Henrik, Julius, and Benjamin. Across one year of logged playing history, the available data shows the highest match exposure for Julius, moderate-to-low exposure for Henrik and Benjamin, respectively, and no statistically convincing upward trend in playing level. Simple exponential smoothing was selected as the forecasting method because the available series are short, irregular, and noisy. The resulting forecasts remain largely flat, with wide uncertainty bands. The practical implication is: occasional training interventions did not produce measurable sustained improvement. The most viable intervention is therefore not more isolated play, but structured, repeated technical training with an experienced coach. Among the three players, Henrik shows the highest apparent upside and should be prioritized for targeted training.
+In this article we analyze the recorded padel level development of three players: Henrik, Julius, and Benjamin. Across one year of logged playing history, the available data shows the highest match exposure for Julius, moderate-to-low exposure for Henrik and Benjamin, respectively, and no statistically convincing upward trend in playing level. Simple exponential smoothing was selected as the forecasting method because the available series are short, irregular, and noisy. The resulting forecasts remain largely flat with wide uncertainty bands. The practical implication is: occasional training interventions did not produce measurable sustained improvement. The most viable intervention is therefore not more isolated play, but structured, repeated technical training with an experienced coach. Among the three players, Henrik shows the highest apparent upside and should be prioritized for targeted training.
 
 # Situation
 Three players, one year of padel ambition:
@@ -28,20 +28,20 @@ Henrik, Julius, and Benjamin have each played padel in a consistent manner for r
   <figcaption><strong>Figure 1:</strong> Meet the players (LTR: Benjamin, Henrik, Julius) </figcaption>
 </figure>
 
-Despite a small asymmetry in match volume, all three players share the same objective: they want to improve their playing level. In recreational padel, level progression is often assumed to follow exposure. More matches should, in theory, lead to better anticipation, cleaner positioning, higher shot tolerance, and better tactical decision-making. On that view, Juliu's highest match count should translate into measurable improvement, while Henrik and Benjamin should show slower but still visible progress.
+Despite a small asymmetry in match volume, all three players share the same objective: they want to improve their playing level. In recreational padel, level progression is often assumed to follow exposure. More matches should, in theory, lead to better anticipation, cleaner positioning, higher shot tolerance, and better tactical decision-making. On that view, Julius' highest match count should translate into measurable improvement, while Henrik and Benjamin should show slower but still visible progress.
 
 The data, however, do not support that optimistic assumption. The central empirical finding is that playing more is not the same as improving. Match exposure produces experience, but experience alone does not necessarily remove technical errors, tactical shortcomings, or repeated decision failures. This creates the core analytical problem of the study.
 
 # Complication
 
-To evaluate the progression of the players, historic level data was extracted from the available player profiles at [Playatomic](https://playtomic.com/) and plotted over a one-year time horizon. The extracted values were treated as the ground-truth. At the time of analysis, Playatomic did not feature a raw player level export, thus the data originates from screenshots rather than a raw database export. Hence, the numerical values should be interpreted as good approximation. Note that data accuracy is negligible for the purpose of this analysis, as the variation within the dataset is significantly greater than the inaccuracy introduced via screenshot data extraction.
+To evaluate the progression of the players, historic level data was extracted from the available player profiles at [Playtomic](https://playtomic.com/) and plotted over a one-year time horizon. The extracted values were treated as the ground-truth. At the time of analysis, Playtomic did not feature a raw player level export, thus the data originates from screenshots rather than a raw database export. Hence, the numerical values should be interpreted as a good approximation. Note that data accuracy is negligible for the purpose of this analysis, as the variation within the dataset is significantly greater than the inaccuracy introduced via screenshot data extraction.
 
 The resulting graph combines raw data points, Damped Holt's exponential smoothing (HES) fitted data, and forecasted future levels with wide confidence intervals.
 
-HES was chosen because the data series are short, noisy, and do not provide enough observations to estimate a credible seasonal structure. Consequently, Holt-Winter's smoothing was discarded. The interested reader is directed to [Forecasting: Principles and Practice](https://playtomic.com/), providing an excellent overview over the applied forecasting method.
-More complex model, such as a seasonal ARIMA model or a trend-seasonality decomposition, are too advanced compared to the limited ground truth data. In this setting, a conservative smoothing method is economically superior as it extracts the available signal without overfitting noise.
+HES was chosen because the data series are short, noisy, and do not provide enough observations to estimate a credible seasonal structure. Consequently, Holt-Winters smoothing was discarded. The interested reader is directed to [Forecasting: Principles and Practice](https://playtomic.com/), providing an excellent overview of the applied forecasting method.
+More complex models, such as a seasonal ARIMA model or a trend-seasonality decomposition, are too advanced compared to the limited ground truth data. In this setting, a conservative smoothing method is economically superior as it extracts the available signal without overfitting noise.
 
-<figure id="Historic player data, fit and forcast">
+<figure id="Historic player data, fit and forecast">
   <img src="/assets/images/specials/birthday-chart.svg" alt="">
   <figcaption><strong>Figure 2:</strong> Historic player data, fit and forecast </figcaption>
 </figure>
@@ -70,7 +70,7 @@ Henrik therefore represents the most attractive training investment. He already 
 The proposed intervention is a 90-minute padel training session for Henrik with coach Jose. The session will be sponsored as a birthday present.
 This is where the analysis ends and the gift begins.
 
-Henrik, your data have spoken with scientific restraint yet clarity. The curve is not yet impressed. The birthday committee has therefore approved a targeted performance intervention. You get 90 minutes with coach Jose, a proper coach, a proper session, and your clear duty to bend that trendline upward. Henrik aligns the appointment with Jose. Payment will be settled via Julius, Henrik, and Max.
+Henrik, your data have spoken with scientific restraint yet clarity. The curve is not yet impressed. The birthday committee has therefore approved a targeted performance intervention. You get 90 minutes with coach Jose, a proper coach, a proper session, and your clear duty to bend that trendline upward. Henrik aligns the appointment with Jose. Payment will be settled via Julius, Benjamin, and Max.
 
 <figure id="Player development forecast">
   <img src="/assets/images/specials/birthday-1.jpeg" alt="">
@@ -83,7 +83,7 @@ In case Jose is not available, Henrik will receive the session with coach Max in
 
 <figure id="Backup coach">
   <img src="/assets/images/specials/birthday-2-comp2.jpeg" alt="">
-  <figcaption><strong>Figure 4:</strong> Backup suggestion for Jose inavailability </figcaption>
+  <figcaption><strong>Figure 4:</strong> Backup suggestion for Jose unavailability </figcaption>
 </figure>
 
 # Acknowledgements
@@ -91,7 +91,7 @@ Special thanks to
 
 - [ChatGPT](https://chatgpt.com/) for image generation
 
-- [Playatomic](https://playtomic.com/) premium subscription at € 9.99 for data gathering
+- [Playtomic](https://playtomic.com/) premium subscription at € 9.99 for data gathering
 
 - [Julius](https://www.linkedin.com/in/juliusscheuerer/) for coaching session organization
 
