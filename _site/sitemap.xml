@@ -37,6 +37,9 @@
 <loc>http://localhost:4000/docs/projects/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/docs/specials/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/docs/blog/</loc>
 </url>
 <url>
@@ -62,6 +65,9 @@
 </url>
 <url>
 <loc>http://localhost:4000/docs/utilities/lists/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/docs/specials/match-based-learning-analysis/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/docs/recipes/recipe-cinnamon-swirl/</loc>
