@@ -1,15 +1,9 @@
-License notice for this repository
-==================================
-
 This repository contains several different kinds of work:
 
 1. Theme and website infrastructure derived from Just the Docs.
 2. Project code and supporting software published by Benjamin Auer.
 3. Projects, blog articles, recipes and, if available, the respective github repository are avilable under MIT license stated below.
 4. External works, e.g. patens and publications whose authorship belongs to the patent holders and the respecitve paper authors and are not part of MIT license.
-
-The Just the Docs theme work is licensed under the MIT License by its original
-author, Patrick Marsceill, as reproduced below.
 
 Project code made available by Benjamin Auer in GitHub repositories linked from
 this website is licensed under the Benjamin Auer MIT License below.
@@ -27,6 +21,8 @@ MIT license notices.
 For legal information and contact details, see:
 https://auerbenji.github.io/docs/imprint/
 
+The Just the Docs theme work is licensed under the MIT License by its original
+author, Patrick Marsceill, as reproduced below.
 
 Benjamin Auer MIT License for project code
 ==========================================

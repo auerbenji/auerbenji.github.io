@@ -16,24 +16,21 @@ parent: Utilities
 
 ## Run Jekyll on local host
 
-```yaml
-# Clearing the jekyll cache when running locally
+Clearing the jekyll cache when running locally
+```bash
 bundle exec jekyll clean
 ```
-
-```yaml
-# Running the page on auto-update
+Running the page on auto-update
+```bash
 bundle exec jekyll serve --livereload
 ```
-
-```yaml
-# Pushing an empty commit to github
+Pushing an empty commit to github to trigger rebuild
+```bash
 git commit --allow-empty -m "trigger rebuild"
 git push origin main
 ```
-
-```yaml
-# Open in your web browser
+Open in your web browser
+```bash
 http://localhost:4000/
 ```
 
