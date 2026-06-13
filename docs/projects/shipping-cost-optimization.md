@@ -1,7 +1,7 @@
 ---
 title: Shipping cost optimization with dangerous goods penalty
 parent: Projects
-nav_enabled: false
+nav_enabled: true
 nav_order: 1
 ---
 

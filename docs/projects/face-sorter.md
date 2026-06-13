@@ -1,7 +1,7 @@
 ---
 title: Face sorting algorithm for large photo collections
 parent: Projects
-nav_enabled: false
+nav_enabled: true
 nav_order: 1
 ---
 
