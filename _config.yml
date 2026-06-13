@@ -197,6 +197,10 @@ kramdown:
     block:
       line_numbers: false
 
+sass:
+  silence_deprecations:
+    - import
+
 compress_html:
   clippings: all
   comments: all
