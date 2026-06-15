@@ -88,34 +88,46 @@ This preserves some variation from the calibration photos, which is useful when 
 > In this workflow, InsightFace maps each detected face to a normalized vector.
 > Similar faces should point in a similar direction in vector space.
 > This turns identity matching into a vector comparison problem.
-> Direction in vector space is also known as cosine similarity:
-> The closer the dot product is to the value of '1' the greater is the fit.
 >
-> For two non-zero vectors cosine similarity is defined as the cosine of the angle $$\theta$$ between them.
+> For two non-zero vectors, cosine similarity compares the direction of the vectors rather than their absolute length.
+> Starting from the dot product identity,
+>
+> $$
+> \mathbf{a} \cdot \mathbf{b}
+> =
+> \lVert \mathbf{a} \rVert
+> \lVert \mathbf{b} \rVert
+> \cos(\theta),
+> $$
+>
+> the cosine of the angle $$\theta$$ between both vector directions is obtained by dividing by the vector lengths:
+>
+> $$
+> \cos(\theta)
+> =
+> \frac{\mathbf{a} \cdot \mathbf{b}}
+> {\lVert \mathbf{a} \rVert \lVert \mathbf{b} \rVert}.
+> $$
 > 
-> Let $$\mathbf{I}$$ be the identity vector from calibration and $$\mathbf{f_c}$$ a face vector candidate from a photo $$P$$, then the candidate's score $$S_c$$ is obtained via cosine similarity:
+> Let $$\mathbf{I}$$ be the identity vector from calibration and $$\mathbf{f_c}$$ a face vector candidate from a photo $$P$$, then the candidate's score $$S_c$$ on $$P$$ is obtained via cosine similarity:
 >
 > $$
 > S_c(\mathbf{I}, \mathbf{f_c}) := \cos(\theta)
 > = \frac{\mathbf{I} \cdot \mathbf{f_c}}{\lVert \mathbf{I} \rVert \lVert \mathbf{f_c} \rVert}
 > $$
 > 
-> As stated the vectors are already normalized, thus
-> 
+> Both embeddings are already normalized.
+>
 > $$
 > S_c(\mathbf{I}, \mathbf{f_c})
-> = \frac{\sum I f_c}
-> {1 \cdot 1}
-> $$
-> 
-> and thus
-> 
-> $$
-> \lim_{\theta \to 0^{\circ}} S_c(\mathbf{I}, \mathbf{f_c})
-> = 1
+> =
+> \mathbf{I} \cdot \mathbf{f_c}
+> =
+> \sum_{k=1}^{d} I_k f_{c,k}.
 > $$
 >
-> that is exactely the scoring quality returned by `score.py`
+> If $$\theta = 0^\circ$$, both vectors point into the same direction, $$\cos(0^\circ) = 1$$, the dot product is $$1$$, and the candidate is a total fit.
+> That is exactly the scoring quality returned by `score.py`.
 
 ## Scoring
 `score.py` iterates through all photos in the `data/` folder.

@@ -200,6 +200,8 @@ kramdown:
 sass:
   silence_deprecations:
     - import
+    - global-builtin
+    - color-functions
 
 compress_html:
   clippings: all
