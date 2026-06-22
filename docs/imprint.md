@@ -5,13 +5,21 @@ nav_order: 99
 
 # Responsible for content
 {: .no_toc }
-Benjamin Auer, Widdersdorfer Str 183/185, 50825 Cologne, Germany
+Benjamin Auer
 {: .fs-6 .fw-300 }
 
 ---
 
+According to §5 TMG
+Benjamin Auer Advisory & Operations
+Marianne-Kirchgessner-Str. 57
+76646 Bruchsal, Germany
+VAT: DE462528823
+
+---
+
 This page expresses my work, view and opinion.
-It is not commercialized. This page uses Google Analytics.
+This page uses Google Analytics.
 In the case of misconduct, please reach out to me via [mail](mailto:{{ site.email }}).
 
 * * *
